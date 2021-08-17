@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Container, Tabs,Tab,Row, Col } from "react-bootstrap";
-import DoctorDetails from "../Components/DoctorDetails";
-
-
-import "./doctorprofile.css";
+import Reportdetails from "../Components/Reportdetails";
+import Reqestreport from "../Components/Reqestreport";
+import Editreport from "../Components/Editreport";
 import axios from "axios";
 
-const Doctorprofile = () => {
+const Report = () => {
   const [username, setUsername] = useState(" ");
-  const [email, setEmail] = useState(" ");
   const [profileImage, setProfilePic] = useState(" ");
   const [fullname, setfullname] = useState("");
-  const [phone, setphone] = useState("");
-  const [specialist, setspecialist] = useState("");
-  const [university, setuniversity ]= useState("");
-  const [other, setother] = useState("");
-  const [experience, setexperience] = useState("");
-  const [treatment, settreatment] = useState(" ");
-  const [Report, setReport] = useState(" ");
+  const [email, setEmail] = useState("");
+
 
   useEffect(() => {
     //Get doctor details
@@ -38,15 +31,7 @@ const Doctorprofile = () => {
             setUsername(res.data.doctor.username);
             setEmail(res.data.doctor.email);
             setfullname(res.data.doctor.fullname);
-            setphone(res.data.doctor.phone);
-            setspecialist(res.data.doctor.specialist);
-            setuniversity(res.data.doctor.university);
-            setother(res.data.doctor.other);
-            setexperience(res.data.doctor.experience);
-            setProfilePic(res.data.doctor.profileImage.imagePublicId);
-            settreatment(res.data.doctor.treatment);
-            setReport(res.data.doctor.Report);
-
+            
 
           })
           .catch((err) => {
@@ -60,36 +45,33 @@ const Doctorprofile = () => {
   }, []);
 
   return (
-    <div className="custom-body">
-      <Row>
+    <div className="custom-body" style={{ paddingBottom: "0.001vh" }}>
+       <h1>Hello Dr.{username}</h1> 
+      <Row style={{ paddingTop: "3vh" }}>
         <Col span={7}>
           <Row>
             <Container>
-              <DoctorDetails
+              <Reportdetails
                 resUsername={username}
                 resEmail={email}
                 cusPP={profileImage}
                 resfullname={fullname}
-                resphone={phone}
-                resspecialist={specialist}
-                resuniversity={university}
-                resother={other}
-                resexperience={experience}
+              
               />
             </Container>
           </Row>
         </Col>
         <Col span={17}>
-          <Container className="custom-content-body">
+        <Container className="custom-content-body">
 <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
-  <Tab eventKey="APPOINMENT HISTORY" title="APPOINMENT HISTORY">
+  
+  <Tab eventKey="REQUEST REPORTS" title="REQUEST REPORTS">
+      <Reqestreport/>
   </Tab>
-  <Tab eventKey="LAB REPORTS" title="LAB REPORTS">
+  <Tab eventKey="EDIT REPORTS" title="EDIT REPORTS">
+      <Editreport/>
   </Tab>
-  <Tab eventKey="APPOINMENTS" title="APPOINMENTS">
-  </Tab>
-  <Tab eventKey="NOTIFICATIONS" title="NOTIFICATIONS">
-  </Tab>
+ 
 </Tabs>
 
           </Container>
@@ -99,4 +81,4 @@ const Doctorprofile = () => {
   );
 };
 
-export default Doctorprofile;
+export default Report;

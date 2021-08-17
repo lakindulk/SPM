@@ -11,6 +11,10 @@ const DoctorSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a username"],
   },
+  fullname: {
+    type: String,
+    required: [true, "Please provide a username"],
+  },
   email: {
     type: String,
     required: [true, "Please provide a email"],
@@ -23,7 +27,84 @@ const DoctorSchema = new mongoose.Schema({
     minlength: 6,
     select: false,
   },
+  phone: {
+    type: Number,
+    required: [true, "Please provide a contact number"],
+    length: 10,
+  },
+specialist:{
+  type: String,
+  required: [true, "Please provide the field of specialist"],
+},
+profileImage: {
+  imagePublicId: {
+    type: String,
+ 
+  },
+  imageSecURL: {
+    type: String,
+ 
+  },
+},
 
+  university: {
+    type: String,
+  },
+  other: {
+    type: String,
+
+  },
+  experience: {
+    type: String,
+  },
+
+treatment: [
+  {
+    patientname:{
+      type: String,
+    },
+    suggesions: {
+      type: String,
+      required: [true, "Please provide suggesions"],
+    },
+    medicines: {
+      type: String,
+      required: [true, "Please provide medicines"],
+    },
+    othernotes: {
+      type: String,
+    },
+    noteduetoreport: {
+      type: String,
+    },
+  },
+  ],
+
+ Report: [
+    {
+      patient:{
+        type: String,
+      },
+      patientsdescription: {
+        type: String,
+        required: [true, "Please provide description"],
+      },
+      docnote: {
+        type: String,  
+      },
+      reporttype1: {
+        type: String,
+        required: [true, "Please provide report type"],
+      },    
+      reporttype2: {
+        type: String,
+        
+      },
+      othertype: {
+        type: String,
+      },
+    },
+    ],
 });
 
 //by using "pre save" we run this code segment before mongoose save data on db

@@ -22,6 +22,19 @@ const PharmasistSchema = new mongoose.Schema({
     minlength: 6,
     select: false,
   },
+  phone: {
+    type: Number,
+    required: [true, "Please provide a contact number"],
+    length: 10,
+  },
+  fullname: {
+    type: String,
+    required: [true, "Please provide a username"],
+  },
+  license: {
+    type: String,
+    required: [true, "Please provide a License Number"],
+  },
 });
 
 //by using "pre save" we run this code segment before mongoose save data on db

@@ -18,7 +18,10 @@ exports.login = async (req, res, next) => {
     user = await PatientModel.findOne({ email: email }).select("+password");
   } else if (role === "pharmasist") {
     user = await PharmasistModel.findOne({ email: email }).select("+password");
-  }  else {
+  } else if (role === "admin") {
+    user = await AdminModel.findOne({ email: email }).select("+password");
+  } 
+   else {
     res.status(422).json({
       success: false,
       desc: "Can not find the user - Please check again",
@@ -43,7 +46,7 @@ exports.login = async (req, res, next) => {
 
 // register new Doctor
 exports.registerDoctor = async (req, res) => {
-  const { username, email, password } =
+  const { username, email, password,fullname ,phone,specialist} =
     req.body;
   //check for users with same email address 
   let existingEmail = await findEmailDuplicates(email, res);
@@ -54,6 +57,9 @@ exports.registerDoctor = async (req, res) => {
         username,
         email,
         password,
+        fullname ,
+        phone,
+        specialist,
       });
       const token = await doctor.getSignedToken();
       addToAllUsers(username, email, "doctor");
@@ -69,7 +75,7 @@ exports.registerDoctor = async (req, res) => {
 
 // register new Labchemist
 exports.registerLabchemist = async (req, res) => {
-  const { username, email, password } =
+  const { username, email, password,phone,qulifications,fullname } =
     req.body;
   //check for users with same email address 
   let existingEmail = await findEmailDuplicates(email, res);
@@ -80,6 +86,9 @@ exports.registerLabchemist = async (req, res) => {
         username,
         email,
         password,
+        phone,
+        qulifications,
+        fullname,
       });
       const token = await labchemist.getSignedToken();
       addToAllUsers(username, email, "labchemist");
@@ -95,7 +104,7 @@ exports.registerLabchemist = async (req, res) => {
 
 // register new patient
 exports.registerPatient = async (req, res) => {
-  const { username, email, password } =
+  const { username, email, password,phone,fullname } =
     req.body;
   //check for users with same email address 
   let existingEmail = await findEmailDuplicates(email, res);
@@ -106,6 +115,8 @@ exports.registerPatient = async (req, res) => {
         username,
         email,
         password,
+        phone,
+        fullname,
       });
       const token = await patient.getSignedToken();
       addToAllUsers(username, email, "patient");
@@ -122,7 +133,7 @@ exports.registerPatient = async (req, res) => {
 
 // register new Pharmasist
 exports.registerPharmasist = async (req, res) => {
-  const { username, email, password } =
+  const { username, email, password,phone,fullname,license } =
     req.body;
   //check for users with same email address 
   let existingEmail = await findEmailDuplicates(email, res);
@@ -132,6 +143,9 @@ exports.registerPharmasist = async (req, res) => {
         username,
         email,
         password,
+        phone,
+        fullname,
+        license,
       });
       const token = await pharmasist.getSignedToken();
       addToAllUsers(username, email, "pharmasist");
@@ -147,7 +161,7 @@ exports.registerPharmasist = async (req, res) => {
 
 // register new admin
 exports.registerAdmin = async (req, res) => {
-  const { username, email, password } =
+  const { username, email, password,phone,fullname } =
     req.body;
   //check for users with same email address 
   let existingEmail = await findEmailDuplicates(email, res);
@@ -157,6 +171,8 @@ exports.registerAdmin = async (req, res) => {
         username,
         email,
         password,
+        phone,
+        fullname, 
       });
       const token = await admin.getSignedToken();
       addToAllUsers(username, email, "admin");
@@ -190,12 +206,7 @@ const findEmailDuplicates = async (email, res) => {
   }
 };
 
-
-
-
-
-
-const addToAllUsers = async (username, email, role) => {
+const addToAllUsers = async (username, email, role,fullname) => {
   const createdAllUser = new AllUsersModel({
     username,
     email,

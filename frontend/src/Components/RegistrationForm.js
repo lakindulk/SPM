@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import { Form, Col, Button, Spinner } from "react-bootstrap";
+import { Form, Col, Button, Spinner ,Container } from "react-bootstrap";
 import axios from "axios";
 import "./RegistrationForm.css";
 
 const RegistrationForm = () => {
   
     const [username, setUsername] = useState("");
+    const [fullname, setfullname] = useState("");
+    const [phone, setphone] = useState("");
+    const [specialist, setspecialist] = useState("");
+    const [qulifications, setqulifications] = useState("");
+    const [license, setlicense] = useState("");
+
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmpassword, setConfirmPassword] = useState("");
@@ -64,7 +71,9 @@ const RegistrationForm = () => {
           username,
           email,
           password,
-          
+          fullname ,
+        phone,
+        specialist,
         };
         await axios
           .post("http://localhost:6500/codebusters/api/auth/reg-doctor", postObject)
@@ -87,7 +96,9 @@ const RegistrationForm = () => {
         username,
         email,
         password,
-        
+        phone,
+        qulifications,
+        fullname,
       };
       await axios
         .post("http://localhost:6500/codebusters/api/auth/reg-labchemist", postObject)
@@ -109,6 +120,8 @@ const RegistrationForm = () => {
         username,
         email,
         password,
+        phone,
+        fullname,
       };
       await axios
         .post(
@@ -136,7 +149,9 @@ const RegistrationForm = () => {
         username,
         email,
         password,
-       
+        phone,
+        fullname,
+        license,
       };
       await axios
         .post("http://localhost:6500/codebusters/api/auth/reg-pharmasist", postObject)
@@ -235,7 +250,9 @@ const RegistrationForm = () => {
             </div>
           )}
           {section === 2 && (
-            <div>
+
+            <Container>
+            <Col>
               <Button
                 variant="warning"
                 onClick={() => {
@@ -276,7 +293,7 @@ const RegistrationForm = () => {
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Password with at least 6 characters"
+                    placeholder=" with at least 6 characters"
                     minLength={6}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -291,14 +308,95 @@ const RegistrationForm = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </Form.Group>
-               
+                <Form.Group as={Col} md={6}>
+                    <Form.Label>Full Name:&nbsp;</Form.Label>
+                    <Form.Control
+                    type="text"
+                    placeholder="Full Name as NIC"
+                    value={fullname}
+                    onChange={(e) => {
+                      setfullname(e.target.value);
+                    }}
+                  />
+                  </Form.Group>
+                  <Form.Group as={Col} md={6}>
+                    <Form.Label>Contact Number:&nbsp;</Form.Label>
+                    <Form.Control
+                    type="text"
+                    placeholder="Contact Number"
+                    value={phone}
+                    onChange={(e) => {
+                      setphone(e.target.value);
+                    }}
+                  />
+                  </Form.Group>
               </Form.Row>
-              
-
-              <Button variant="outline-success" type="submit">Submit</Button>
-
-              
-            </div>
+              {role === "doctor" && (
+              <div>
+                <Form.Row>
+                  <Form.Group as={Col} md={6}>
+                    <Form.Label>Field Of Specialist:&nbsp;</Form.Label>
+                    <Form.Control
+                    type="text"
+                    placeholder="Field of specialist"
+                    value={specialist}
+                    onChange={(e) => {
+                      setspecialist(e.target.value);
+                    }}
+                  />
+                  </Form.Group>                 
+                </Form.Row>                
+              </div>
+            )}
+            {role === "labchemist" && (
+              <div>
+                <Form.Row>
+                  <Form.Group as={Col} md={6}>
+                    <Form.Label>Qulifications:&nbsp;</Form.Label>
+                    <Form.Control
+                    type="text"
+                    placeholder="Qulifications"
+                    value={qulifications}
+                    onChange={(e) => {
+                      setqulifications(e.target.value);
+                    }}
+                  />
+                  </Form.Group>                 
+                </Form.Row>                
+              </div>
+            )}{role === "pharmasist" && (
+              <div>
+                <Form.Row>
+                  <Form.Group as={Col} md={6}>
+                    <Form.Label>License Number :&nbsp;</Form.Label>
+                    <Form.Control
+                    type="number"
+                    placeholder="License Number"
+                    value={license}
+                    onChange={(e) => {
+                      setlicense(e.target.value);
+                    }}
+                    
+                  />
+                  </Form.Group>                 
+                </Form.Row>                
+              </div>
+            )}
+            {role === "patient" && (
+              <div>
+                <Form.Row>
+                  <Form.Group as={Col} md={6} style={{ marginTop: "1vh" }}>
+                    <p>Greetings!! Welcome to iCross Hospitals..&nbsp;</p>
+                    
+                  </Form.Group>                 
+                </Form.Row>                
+              </div>
+            )}
+           </Col>
+            <Col>
+              <Button variant="outline-success" type="submit"  style={{ marginTop: "2vh" }}>Submit</Button>
+              </Col>         
+              </Container>
           )}
          
         </Form>

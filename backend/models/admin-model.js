@@ -23,7 +23,16 @@ const AdminSchema = new mongoose.Schema({
     minlength: 6,
     select: false,
   },
-
+  phone: {
+    type: Number,
+    required: [true, "Please provide a contact number"],
+    length: 10,
+    select: false,
+  },
+  fullname: {
+    type: String,
+    required: [true, "Please provide a username"],
+  },
 });
 
 //by using "pre save" we run this code segment before mongoose save data on db
