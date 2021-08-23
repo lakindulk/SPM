@@ -155,7 +155,7 @@ const Doctordetails = (props) => {
         )
         .then((res) => {
           console.log(props.resUsername);
-          alert("researcher Update Successfully!");
+          alert("Update Successfully!");
           window.location.reload();
         })
         .catch((err) => {

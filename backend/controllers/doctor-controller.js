@@ -1,6 +1,8 @@
 const DoctorModel = require("../models/doctor-model");
 const AllUsersModel = require("../models/allusers-model");
 const NotificationModel=require("../models/notification-model");
+const PatientModel=require("../models/patient-model");
+const TreatmentModel=require("../models/treatment-model");
 const { cloudinary } = require("../utils/cloudinary");
 
 //CRUD operations of doctor 
@@ -29,14 +31,9 @@ exports.getDoctorDetails = async (req, res) => {
   //update doctor
 exports.updateDoctorDetails = async (req, res) => {
     const { username, email,university,other,experience,phone,
-      fullname } = req.body;
-  
-    if (email) {
-    
+      fullname } = req.body; 
+    if (email) {   
       try {
-
-     
-
         await AllUsersModel.findOneAndUpdate(
           { email: req.user.email },
           { email: email },
@@ -49,10 +46,8 @@ exports.updateDoctorDetails = async (req, res) => {
             "Error in updatedoctor-update AllUsers controller-" + error,
         });
       }
-    }
-  
-    try {
-    
+    }  
+    try {   
       const updatedoctor = await DoctorModel.findByIdAndUpdate(
         req.user.id,
         {
@@ -89,10 +84,8 @@ exports.updateProfilePicture = async (req, res) => {
     const { fileEnc } = req.body;
   
     try {
-      const destroyedImage = await cloudinary.uploader.destroy(
-        req.user.profileImage.imagePublicId
-      );
-      if (destroyedImage) {
+     
+      
         try {
           const uploadedResponse = await cloudinary.uploader.upload(fileEnc, {
             upload_preset: "doctor-profile-pictures",
@@ -129,12 +122,7 @@ exports.updateProfilePicture = async (req, res) => {
             desc: "Error in uploading new image-" + error,
           });
         }
-      } else {
-        res.status(500).json({
-          success: false,
-          desc: "Error in previous image remove-" + error,
-        });
-      }
+    
     } catch (error) {
       res.status(500).json({
         success: false,
@@ -164,56 +152,54 @@ exports.deleteDoctorDetails = async (req, res) => {
 
 // add treatment
 exports.addtreatment = async (req, res) => {
-  const { patientname, suggesions, medicines, othernotes,noteduetoreport } =
+  const { patientname, suggesions, medicines, othernotes,noteduetoreport,docname} =
     req.body;
-    const data = {
-      fromId: req.user._id,
-      subject: "Suggest Treatment to a patient",
-      desc: req.body.patientname,
-      
-    };
-  try {
-    
-    const treatment = {
-      patientname, 
-      suggesions, 
-      medicines, 
-      othernotes,
-      noteduetoreport,
-    };
+  
+    try {    
+      const doctor = await TreatmentModel.create({
+        patientname, 
+        suggesions, 
+        medicines, 
+        othernotes,
+        noteduetoreport,
+        docname
+      });
+      res.status(201).json({ success: true, doctor });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        desc: "Error in doctor  controller-" + error,
+      });
+    }  
+};
 
-    const newtreatment = await DoctorModel.findOneAndUpdate(
-      { _id: req.user._id },
-      { $push: { treatment: treatment } },
-      {
-        new: true,
-      }
-    );
-    const result = await sendNotification(data, res);
-    if (result) {
-    res.status(201).send({ newtreatment,success: true, result });
-    }
+//fetch Treatment
+exports.getTreatment = async (req, res) => {
+  try {
+    const Treatment = await TreatmentModel.find();
+    res.status(200).send({
+      Treatment,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
-      desc: "Error in doctor controller-" + error,
+      desc: "Error in getAlluserDetails controller-" + error,
     });
   }
 };
 
-
 // edit treatment
 exports.updatetreatment = async (req, res) => {
-  const {  suggesions, medicines, othernotes,noteduetoreport , tID } = req.body;
+  let { tID, suggesions, medicines, othernotes, noteduetoreport } = req.body;
   try {
-    const result = await DoctorModel.findOneAndUpdate(
-      { "treatment._id": tID },
+    const updatedtreatment = await TreatmentModel.findByIdAndUpdate(
+      tID,
       {
         $set: {
-          "treatment.$.suggesions": suggesions,
-          "treatment.$.medicines": medicines,
-          "treatment.$.othernotes": othernotes,
-          "treatment.$.noteduetoreport": noteduetoreport,
+          suggesions, 
+          medicines, 
+          othernotes, 
+          noteduetoreport
         },
       },
       {
@@ -222,52 +208,26 @@ exports.updatetreatment = async (req, res) => {
         omitUndefined: true,
       }
     );
-    res.status(200).json({ success: true, desc: " Treatmant data updated", result });
+    res.status(200).send({
+      success: true,
+      desc: "Treatment data updated successfully",
+      updatedtreatment,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
-      desc: "Error in updateTreatmant controler-" + error,
+      desc: "Error in updatetreatment controller-" + error,
     });
   }
 };
 
 
 //remove treatmant data
-exports.removetreatmant= async (req, res) => {
-  const { tID } = req.body;
-  const data = {
-    fromId: req.user._id,
-    subject: " Treatment deleted",
-    desc:"deleted",
-    
-  };
-  try {
-    const updatetreatment = await DoctorModel.updateOne(
-      { _id: req.user._id },
-      { $pull: { treatment: { _id: tID } } },
-      {
-        new: true,
-      }
-    );
-
-    const result = await sendNotification(data, res);
-    res.status(200).json({
-      success: true,
-      desc: " treatmant data deleted",
-      updatetreatment,result
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      desc: "Error in removetreatmant controler-" + error,
-    });
-  }
-};
 
 
 // add report request
 exports.addreportrequest = async (req, res) => {
-  const { patient, patientsdescription, docnote, reporttype1,reporttype2,othertype } =
+  const { patientname, patientsdescription, docnote, reporttype1,reporttype2,othertype } =
     req.body;
     const data = {
       fromId: req.user._id,
@@ -278,7 +238,7 @@ exports.addreportrequest = async (req, res) => {
   try {
     
     const Report = {
-      patient, 
+      patientname, 
       patientsdescription, 
       docnote, 
       reporttype1,
@@ -307,7 +267,7 @@ exports.addreportrequest = async (req, res) => {
 
 // edit report request
 exports.updatereportrequest = async (req, res) => {
-  const {  patientsdescription, docnote, reporttype , rID } = req.body;
+  const {  patientsdescription, docnote, reporttype1 ,reporttype2,othertype, rID } = req.body;
   try {
     const result = await DoctorModel.findOneAndUpdate(
       { "Report._id": rID },
@@ -315,7 +275,10 @@ exports.updatereportrequest = async (req, res) => {
         $set: {
           "Report.$.patientsdescription": patientsdescription,
           "Report.$.docnote": docnote,
-          "Report.$.reporttype": reporttype,
+          "Report.$.reporttype1": reporttype1,
+          "Report.$.reporttype2": reporttype2,
+          "Report.$.othertype": othertype,
+          
         },
       },
       {
@@ -357,6 +320,7 @@ exports.removereportrequest= async (req, res) => {
     });
   }
 };
+
 
 
 

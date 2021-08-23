@@ -26,6 +26,7 @@ exports.deleteNotification = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
+      
       success: false,
       desc: "Error in deleteNotification in notification controller - " + error,
     });

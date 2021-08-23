@@ -10,6 +10,10 @@ const authenticationRoutes = require("./routes/authentication-routes");
 const doctorRoutes = require("./routes/doctor-routes");
 const notificationRoute=require("./routes/notification-routes");
 const adminRoutes=require("./routes/admin-routes");
+const treatmentRoutes=require("./routes/treatment-routes");
+const appointmentRoutes=require("./routes/appointment-routes");
+
+
 
 const app = express();
 
@@ -37,6 +41,10 @@ mongoose
 //use routes
 app.use("/codebusters/api/auth", authenticationRoutes);
 app.use("/codebusters/api/doctorpvt", doctorRoutes);
+
+app.use("/codebusters/api/doctorpvt/treatment", treatmentRoutes);
+app.use("/codebusters/api/patientpvt/appointment", appointmentRoutes);
+
 app.use("/codebusters/api/notification", notificationRoute);
 app.use("/codebusters/api/admin",adminRoutes);
 //event loop for server

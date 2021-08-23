@@ -10,13 +10,14 @@ const Reportdetails = (props) => {
     <div className="navigation-panel">
       <ListGroup variant="flush">
         <ListGroup.Item className="lkcustom-pp">
-          <Image
+        <Image
+            style={{ paddingBottom:"2vh",paddingTop:"2vh"}}
             className="lkcustom-pp-img "
             cloudName="iplus"
             publicId={props.cusPP}
           />
         </ListGroup.Item>
-        <ListGroup.Item>{props.resfullname}</ListGroup.Item>       
+        <ListGroup.Item><center>{props.resfullname}</center></ListGroup.Item>       
       </ListGroup>     
     </div>
   );

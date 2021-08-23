@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, Tabs,Tab,Row, Col } from "react-bootstrap";
 import DoctorDetails from "../Components/DoctorDetails";
-
-
+import Appointment from "../Components/Appointment";
+import Appointmenthistory from "../Components/Appointmenthistory";
 import "./doctorprofile.css";
 import axios from "axios";
 
@@ -16,8 +16,7 @@ const Doctorprofile = () => {
   const [university, setuniversity ]= useState("");
   const [other, setother] = useState("");
   const [experience, setexperience] = useState("");
-  const [treatment, settreatment] = useState(" ");
-  const [Report, setReport] = useState(" ");
+  
 
   useEffect(() => {
     //Get doctor details
@@ -44,8 +43,7 @@ const Doctorprofile = () => {
             setother(res.data.doctor.other);
             setexperience(res.data.doctor.experience);
             setProfilePic(res.data.doctor.profileImage.imagePublicId);
-            settreatment(res.data.doctor.treatment);
-            setReport(res.data.doctor.Report);
+          
 
 
           })
@@ -56,6 +54,8 @@ const Doctorprofile = () => {
         alert("Error occured!!! : " + error);
       }
     };
+
+
     GetDoctorDetails();
   }, []);
 
@@ -64,6 +64,7 @@ const Doctorprofile = () => {
       <Row>
         <Col span={7}>
           <Row>
+            <h3 style={{ paddingLeft: "5vh" ,paddingBottom:"1vh"}}>Hello {username}</h3>
             <Container>
               <DoctorDetails
                 resUsername={username}
@@ -83,10 +84,12 @@ const Doctorprofile = () => {
           <Container className="custom-content-body">
 <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
   <Tab eventKey="APPOINMENT HISTORY" title="APPOINMENT HISTORY">
+    <Appointmenthistory/>
   </Tab>
   <Tab eventKey="LAB REPORTS" title="LAB REPORTS">
   </Tab>
   <Tab eventKey="APPOINMENTS" title="APPOINMENTS">
+    <Appointment/>
   </Tab>
   <Tab eventKey="NOTIFICATIONS" title="NOTIFICATIONS">
   </Tab>

@@ -75,7 +75,7 @@ const Reqestreport = (props) => {
    Description :
         </Form.Label>
     <Col sm="10">
-    <Form.Control type="text" placeholder="Enter Paper Authors"  onChange={(e) => {
+    <Form.Control type="text" placeholder="Enter Paper Description"  onChange={(e) => {
                         setpatientsdescription(e.target.value); }}/>
     </Col>
   </Form.Group>
@@ -102,8 +102,7 @@ Reports               </Form.Label>
           as="select"
           custom
           onChange={(e) => {
-            setreporttype1(e.target.value); }}
-        >
+            setreporttype1(e.target.value); }}>
             <option value="not selected">No type 1 report</option>
           <option value="Shugar Reports">Shugar Reports</option>
           <option value="Presure Reports">Presure Reports</option>
