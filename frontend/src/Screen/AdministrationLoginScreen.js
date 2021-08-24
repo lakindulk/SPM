@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Col, Button } from "react-bootstrap";
+import { Form, Col, Button,Card } from "react-bootstrap";
 import axios from "axios";
 
 const AdministrationLogin = () => {
@@ -40,10 +40,12 @@ const AdministrationLogin = () => {
   };
 
   return (
-    <div style={{ paddingTop: "5vh", paddingBottom: "15vh" ,paddingLeft:"10vh" }}>
-      <Form onSubmit={loginHandler}>
+    <div style={{ paddingTop: "5vh", paddingBottom: "15vh" ,paddingLeft:"50vh" }}>
+      <Card border="light" style={{ width: '48rem' }}>
+    <Card.Header>Administration Login Panel</Card.Header>
+    <Card.Body>
+    <Form onSubmit={loginHandler}>
         {error && <span className="error-message">{error}</span>}
-        <h2>Administration Login Panel</h2>
         <Form.Label as="legend" column sm={12}>
           Login as:
         </Form.Label>
@@ -82,12 +84,19 @@ const AdministrationLogin = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+        <div style={{ paddingTop: "3vh"}}>
         <Form.Group as={Col} md={12} className="login-btn">
           <Button variant="primary" type="submit" block>
             Login
           </Button>
         </Form.Group>
+        </div>
       </Form>
+    </Card.Body>
+  </Card>
+  <br />
+      
+
     </div>
   );
 };

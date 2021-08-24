@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel'
 
 const Loginslides = () => {
   return (
-    <div >
+    <div style={{paddingBottom:"5vh"}} >
       <Carousel variant="dark" >
   <Carousel.Item>
     <img

@@ -1,9 +1,9 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar';
-import Dashboad from '../Components/Dashboad';
+import Homemanagement from '../Components/Homemanagement';
 import {Container,Row,Col} from "react-bootstrap";
 
-const Admin = () => {
+const Homescreenmanagement = () => {
     return (
         <div>
 
@@ -18,7 +18,7 @@ const Admin = () => {
       <Col sm={9}>
           <Container>
       
-          <Dashboad/>
+          <Homemanagement/>
           </Container>
       
       </Col>
@@ -30,4 +30,4 @@ const Admin = () => {
     );
   };
   
-  export default Admin;
+  export default Homescreenmanagement;

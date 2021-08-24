@@ -205,10 +205,10 @@ const Doctordetails = (props) => {
           </Button>{" "}
           <Button onClick={showModal3} size="sm" variant="outline-danger">
             Delete Account
-          </Button>{" "}
+          </Button>{" "}<div style={{paddingTop:"1vh"}}>
           <Button onClick={handleShow2} size="sm" variant="outline-success">
             Update Picture
-          </Button>{" "}
+          </Button>{" "}</div>
         </ListGroup.Item>
       </ListGroup>
       

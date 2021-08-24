@@ -1,9 +1,9 @@
 import React from 'react'
 import Sidebar from '../Components/Sidebar';
-import Dashboad from '../Components/Dashboad';
+import Payment from '../Components/Payment';
 import {Container,Row,Col} from "react-bootstrap";
 
-const Admin = () => {
+const Paymentmanagement = () => {
     return (
         <div>
 
@@ -18,7 +18,7 @@ const Admin = () => {
       <Col sm={9}>
           <Container>
       
-          <Dashboad/>
+          <Payment/>
           </Container>
       
       </Col>
@@ -30,4 +30,4 @@ const Admin = () => {
     );
   };
   
-  export default Admin;
+  export default Paymentmanagement;

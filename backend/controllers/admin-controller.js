@@ -6,7 +6,7 @@ const Allusers =require("../models/allusers-model");
     try {
       const admindetails = await Adminmodal.find();
       res.status(200).send({
-        admindetails,
+        admindetails
       });
     } catch (error) {
       res.status(500).json({
@@ -21,7 +21,7 @@ exports.getAlluserDetails = async (req, res) => {
     try {
       const allusers = await Allusers.find();
       res.status(200).send({
-        allusers,
+        allusers
       });
     } catch (error) {
       res.status(500).json({

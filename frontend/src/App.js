@@ -11,7 +11,8 @@ import Pharmasist from "./Screen/Pharmasist";
 import AdministrationLoginScreen from "./Screen/AdministrationLoginScreen";
 import Admin from "./Screen/Admin";
 import Report from "./Components/Report";
-
+import Homescreenmanagement from "./Screen/Homescreenmanagement";
+import Paymentmanagement from "./Screen/Paymentmanagement";
 
 
 const App = () => {
@@ -50,7 +51,12 @@ const App = () => {
         <Switch>
           <Route exact path="/profile/pharmasist" component={Pharmasist} />
         </Switch>
-        
+        <Switch>
+          <Route exact path="/admin/homescreenmanagement" component={Homescreenmanagement} />
+        </Switch>
+        <Switch>
+          <Route exact path="/admin/paymentmanagement" component={Paymentmanagement} />
+        </Switch>
      <Footer/>
 
      

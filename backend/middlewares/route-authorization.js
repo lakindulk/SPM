@@ -4,7 +4,6 @@ const LabchemistModel = require("../models/labchemist-model");
 const PatientModel = require("../models/patient-model");
 const PharmasistModel = require("../models/pharmasist-model");
 
-
 exports.protectedDoctor = async (req, res, next) => {
   let token;
   token = tokenValidate(req);
@@ -69,6 +68,7 @@ exports.protectedPharmasist = async (req, res, next) => {
     invalidUserResponse(res, err);
   }
 };
+
 
 
 const tokenValidate = (reqObj) => {

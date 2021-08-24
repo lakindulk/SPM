@@ -1,6 +1,8 @@
 import React, { useState , useEffect} from "react";
 import { Card, Button,Modal,Form ,Col,Container,Row} from "react-bootstrap";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 import "./appointment.css";
 const Appointment = () => {
   const [fullname, setfullname] = useState("");
@@ -83,7 +85,6 @@ const Appointment = () => {
           )
           .then((res) => {
             setapointment(res.data.apointment);
-            console.log(res.data.apointment);
           })
           .catch((err) => {
             alert(err.message);
@@ -93,27 +94,19 @@ const Appointment = () => {
       }
     };
 
-    
-
-
-
-
-  
-
-
     GetDoctorName();
     getAppointment();
   }, []);
 
   return (  
-    <div>
+    <div style={{paddingBottom:"4vh"}}>
 
 
 
       {appointments.map((appointment,index)=>
       (
         <div  key={index}>
- {appointment.physician === "Mrs. Gamage" && (
+ {appointment.physician === fullname && (
           <div style={{paddingTop:"1vh",paddingRight:"2vh"}}>
 <Card 
 className="hoover"
@@ -122,6 +115,10 @@ className="hoover"
   <Card.Body>
     <Card.Title>Date: {appointment.appointmentDate}</Card.Title>
     <Card.Title>Time: {appointment.appointmentTime}</Card.Title>
+    
+    <Card.Text>
+      Gender: {appointment.gender}
+    </Card.Text>
     <Card.Text>
     {appointment.appointmentNote}
     </Card.Text>
@@ -223,9 +220,11 @@ className="hoover"
           <Button variant="outline-secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="outline-dark" onClick={handleClose}>
+          <Link to="/report">
+          <Button variant="outline-dark"  >
             Request Lab Report
           </Button>
+        </Link>
           <Button variant="outline-primary" onClick={handleOk2}>
             Save Changes
           </Button>

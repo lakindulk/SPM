@@ -24,7 +24,7 @@ const AdminSchema = new mongoose.Schema({
     select: false,
   },
   phone: {
-    type: Number,
+    type: String,
     required: [true, "Please provide a contact number"],
     length: 10,
     select: false,

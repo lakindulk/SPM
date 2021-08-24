@@ -6,7 +6,7 @@ import Loginslides from "../Components/Loginslides";
 
 const RegistrationScreen = () => {
   return (
-    <div style={{ paddingTop: "5vh", paddingBottom: "5vh" }}>
+    <div style={{ paddingTop: "5vh", paddingBottom: "10vh" }}>
        
        <Container>
         <Row>
