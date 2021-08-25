@@ -1,0 +1,40 @@
+.noticeContainer{
+    background-color: rgb(235, 246, 250);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.adminbtn{
+    width:250px;
+    height: 40px;
+    border-radius: 30px;
+    margin-left: 100px;
+    background-color: rgb(148, 153, 177);
+    border-color: rgb(0, 2, 3);
+    
+}
+
+.adminbtn:hover{
+    background: rgb(7, 3, 44);
+    color: #baaece;
+}
+
+.actionbtnE{
+    width:100px;
+    height: 40px;
+    border-radius: 30px;
+    background-color: rgb(101, 103, 109);
+    border-color: rgb(0, 2, 3);
+    
+}
+
+.actionbtnR{
+    width:100px;
+    height: 40px;
+    border-radius: 30px;
+    background-color: rgb(158, 71, 100);
+    margin-left: 10px;
+    border-color: rgb(0, 2, 3);
+}

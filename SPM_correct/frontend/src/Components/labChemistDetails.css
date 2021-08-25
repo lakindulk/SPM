@@ -1,0 +1,64 @@
+.mkcont{
+  margin-top: 38px;
+  margin-left: 80px;
+  width: 370px;
+  height: 400px;
+  object-fit: scale-down;
+  box-shadow: 60px -36px rgb(28, 39, 63);
+  background-color: rgb(99, 145, 145);
+}
+.lkcustom-pp {
+    margin: auto;
+    width: 17vw;
+    height: 17vw;
+    padding: 0;
+  }
+  
+  .lkcustom-pp-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0;
+  }
+  
+  .lklabelstyle{  font-style: normal;
+        color: black;
+        text-decoration: black;
+        align-self: auto;
+      }
+  
+  .lkfilestyle{  font-style: normal;
+    color: black;
+    text-decoration: black;
+  }
+  
+  .lksize{
+    Width: 200;
+    max-height: 400px; 
+  }
+  
+  .lkcolor-profile-text{
+    color: rgb(130, 136, 168);
+  }
+
+  .lkContain{
+    
+      margin-left: 20px;
+      height: 16em;
+      width: 19.5rem;
+      border-style: inset;
+      margin-bottom: 10%;
+      
+  }
+  .prodetails{
+    margin-left: 540px;
+    margin-bottom: 200ovh;
+    width: 2000vh;
+    background-color: rgb(92, 119, 128);
+  
+  }
+
+  .crudbtn{
+     width: 10em;
+     margin-bottom: 20px;
+  }
