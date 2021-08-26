@@ -1,0 +1,44 @@
+.formAllign{
+        margin-left: 30vh;
+        margin-right: 30vh;
+        margin-bottom: 20vh;
+        margin-top: 10vh;
+        
+        }
+.StockTable{ 
+    margin-left: 10vh;
+    margin-right: 10vh;
+    margin-bottom: 10vh;
+    margin-top: 10vh;
+}
+.btn-primary{
+    margin-right: 2vh;
+    }
+.item-edit-container{
+    margin-left: 30vh;
+    margin-right: 30vh;
+    margin-bottom: 20vh;
+    margin-top: 10vh;
+}      
+.PnavBar{
+    margin-left: 10vh;
+    margin-right: 10vh;
+        
+} 
+.Nav-Stock{
+    margin-left: 35vh;
+    font-weight: bold;
+} 
+.Nav-Order{
+    margin-left: 45vh;
+   
+    font-weight: bold;
+}
+.Pharmacist_pro_container{
+    margin-left: 10vh;
+    margin-right: 10vh;
+    margin-bottom: 5vh;
+}
+.custom-body{
+    margin-bottom: 10vh;
+}

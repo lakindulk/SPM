@@ -31,7 +31,7 @@ const Report = () => {
             setUsername(res.data.doctor.username);
             setEmail(res.data.doctor.email);
             setfullname(res.data.doctor.fullname);
-            setProfilePic(res.data.doctor.profileImage.imagePublicId);
+            
 
           })
           .catch((err) => {
@@ -46,7 +46,7 @@ const Report = () => {
 
   return (
     <div className="custom-body" style={{ paddingBottom: "0.001vh" }}>
-       <h1 style={{ paddingLeft:"2vh"}} >Hello Dr.{username}</h1> 
+       <h1>Hello Dr.{username}</h1> 
       <Row style={{ paddingTop: "3vh" }}>
         <Col span={7}>
           <Row>

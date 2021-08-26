@@ -11,8 +11,11 @@ import Pharmasist from "./Screen/Pharmasist";
 import AdministrationLoginScreen from "./Screen/AdministrationLoginScreen";
 import Admin from "./Screen/Admin";
 import Report from "./Components/Report";
-import Homescreenmanagement from "./Screen/Homescreenmanagement";
-import Paymentmanagement from "./Screen/Paymentmanagement";
+import Reportxx from "./Components/Reqestreport";
+import AddItem from "./Components/AddItem";
+import AllStockItem from "./Components/AllStock"
+import EditItem from "./Components/EditItem";
+
 
 
 const App = () => {
@@ -35,7 +38,9 @@ const App = () => {
         <Switch>
           <Route exact path="/report" component={Report} />
         </Switch>
-      
+        <Switch>
+          <Route exact path="/reports" component={Reportxx} />
+        </Switch>
         <Switch>
           <Route exact path="/" component={Home} />
         </Switch>
@@ -52,11 +57,15 @@ const App = () => {
           <Route exact path="/profile/pharmasist" component={Pharmasist} />
         </Switch>
         <Switch>
-          <Route exact path="/admin/homescreenmanagement" component={Homescreenmanagement} />
+          <Route path="/pharmacist/stock/add" exact component={AddItem}/>
         </Switch>
         <Switch>
-          <Route exact path="/admin/paymentmanagement" component={Paymentmanagement} />
+          <Route path="/pharmacist/stock" exact component={AllStockItem}/>
         </Switch>
+        <Switch>
+          <Route path="/pharmacist/stock/edit/:id" exact component={EditItem}/>
+        </Switch>
+        
      <Footer/>
 
      

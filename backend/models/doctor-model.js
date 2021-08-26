@@ -58,6 +58,28 @@ profileImage: {
     type: String,
   },
 
+treatment: [
+  {
+    patientname:{
+      type: String,
+    },
+    suggesions: {
+      type: String,
+      required: [true, "Please provide suggesions"],
+    },
+    medicines: {
+      type: String,
+      required: [true, "Please provide medicines"],
+    },
+    othernotes: {
+      type: String,
+    },
+    noteduetoreport: {
+      type: String,
+    },
+  },
+  ],
+
  Report: [
     {
       patient:{

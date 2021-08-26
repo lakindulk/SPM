@@ -10,7 +10,7 @@ const Editreseaechppr = (props) => {
   const [reporttype2, setreporttype2] = useState("");
   const [othertype, setothertype] = useState("");
 
-  const [rID,setid] = useState("");
+  const [rpID,setid] = useState("");
 
   const [error] = useState("");
   
@@ -50,7 +50,7 @@ const Editreseaechppr = (props) => {
         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
       },
     };
-    let data = {rID};
+    let data = {rpID};
     
     try {
       await axios
@@ -81,12 +81,12 @@ const Editreseaechppr = (props) => {
     };
 
     let dataObject = {
-         rID,
+        rpID,
         patientsdescription,
         docnote,
         reporttype1,
         reporttype2,
-        othertype,
+        othertype
       
     };
 
@@ -133,8 +133,7 @@ const Editreseaechppr = (props) => {
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form>
+        <Modal.Body><Form>
           {error && <span className="error-message">{error}</span>}
           <Form.Row>
             <Form.Group as={Col} md={5} controlId="topic">

@@ -7,7 +7,7 @@ const PharmasistSchema = new mongoose.Schema({
     type: String,
     default: "pharmasist",
   },
-  username: {
+  username: {        
     type: String,
     required: [true, "Please provide a username"],
   },

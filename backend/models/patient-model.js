@@ -31,33 +31,6 @@ const PatientSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a username"],
   },
-  
-  gender:{
-    type:String,
-    default:'undefined'
-  },
-
-  bloodGroup:{
-    type:String,
-    default:'undefined'
-  },
-
-  address:{
-    type:String,
-    default:'undefined'
-  },
-
-  zipcode:{
-    type: String,
-    default:'undefined'
-  },
-
-  nicNumber:{
-    type:String,
-    default:'undefined'
-  },
-
-
 });
 
 //by using "pre save" we run this code segment before mongoose save data on db

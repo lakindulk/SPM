@@ -155,7 +155,7 @@ const Doctordetails = (props) => {
         )
         .then((res) => {
           console.log(props.resUsername);
-          alert("Update Successfully!");
+          alert("researcher Update Successfully!");
           window.location.reload();
         })
         .catch((err) => {
@@ -205,10 +205,10 @@ const Doctordetails = (props) => {
           </Button>{" "}
           <Button onClick={showModal3} size="sm" variant="outline-danger">
             Delete Account
-          </Button>{" "}<div style={{paddingTop:"1vh"}}>
+          </Button>{" "}
           <Button onClick={handleShow2} size="sm" variant="outline-success">
             Update Picture
-          </Button>{" "}</div>
+          </Button>{" "}
         </ListGroup.Item>
       </ListGroup>
       
