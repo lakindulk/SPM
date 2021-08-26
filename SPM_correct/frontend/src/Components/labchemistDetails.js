@@ -146,19 +146,31 @@ const LabchemistDetails = (props) => {
                         <div>
                             <Container>
                                 <div >
-                                    <ListGroup.Item style={{ fontSize:"18px", width: "32rem" }}>Lab Chemist Name: {props.resfullname}</ListGroup.Item>
-                                    <ListGroup.Item style={{ fontSize:"18px", width: "32rem" }}>Qualifications: {props.resQualifications}</ListGroup.Item>
-                                    <ListGroup.Item style={{ fontSize:"18px", width: "32rem" }}>Email: {props.resEmail}</ListGroup.Item>
-                                    <ListGroup.Item style={{ fontSize:"18px", width: "32rem" }}>Conntact Number: {props.resphone}</ListGroup.Item>
+                                    <ListGroup.Item style={{ fontSize: "18px", width: "32rem" }}>Lab Chemist Name: {props.resfullname}</ListGroup.Item>
+                                    <ListGroup.Item style={{ fontSize: "18px", width: "32rem" }}>Qualifications: {props.resQualifications}</ListGroup.Item>
+                                    <ListGroup.Item style={{ fontSize: "18px", width: "32rem" }}>Email: {props.resEmail}</ListGroup.Item>
+                                    <ListGroup.Item style={{ fontSize: "18px", width: "32rem" }}>Conntact Number: {props.resphone}</ListGroup.Item>
 
                                     <ListGroup.Item style={{ width: "32rem" }}><br />
-                                        <Button className="crudbtn" onClick={handleShow} size="sm" variant="secondary">
-                                            Edit Details
-                                        </Button>{" "}
-                                        <Button className="crudbtn" onClick={showModal3} size="sm" variant="secondary">
-                                            Delete Account
-                                        </Button>{" "}
-
+                                        <tr>
+                                            <td>
+                                                <Button className="crudbtn" onClick={handleShow} size="sm" variant="secondary">
+                                                    Edit Details
+                                                </Button>{" "}
+                                            </td>
+                                            <td>
+                                                <Button className="crudbtn" style={{ paddingLeft: "5vh" }} onClick={""} size="sm" variant="secondary">
+                                                    Edit Picture
+                                                </Button>{" "}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <Button className="crudbtn" onClick={showModal3} size="sm" variant="secondary">
+                                                    Delete Account
+                                                </Button>{" "}
+                                            </td>
+                                        </tr>
                                     </ListGroup.Item>
 
                                 </div>
@@ -189,6 +201,7 @@ const LabchemistDetails = (props) => {
                                     onChange={(e) => {
                                         setUsername(e.target.value);
                                     }}
+                                    required
                                 />
                             </Form.Group>
                             <Form.Group controlId="email">
@@ -198,6 +211,7 @@ const LabchemistDetails = (props) => {
                                     placeholder="Enter email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    required
                                 />
                             </Form.Group>
                             <Form.Group controlId="fulname">
@@ -207,6 +221,7 @@ const LabchemistDetails = (props) => {
                                     placeholder="Enter Full name"
                                     value={fullname}
                                     onChange={(e) => setfullname(e.target.value)}
+                                    required
                                 />
                             </Form.Group>
 
@@ -227,6 +242,7 @@ const LabchemistDetails = (props) => {
                                     placeholder="Enter qualification"
                                     value={qualifications}
                                     onChange={(e) => setqualifications(e.target.value)}
+                                    required
                                 />
                             </Form.Group>
                         </Col>
