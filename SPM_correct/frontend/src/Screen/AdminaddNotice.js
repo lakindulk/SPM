@@ -41,6 +41,7 @@ class AdminaddNotice extends Component {
     }
 
     onDelete = (id) => {
+        alert('Do you confirm the deletion?');
         axios.delete('http://localhost:6500/notice/delete/' + id)
             .then(response => {
                 this.setState({ redirect: true });
