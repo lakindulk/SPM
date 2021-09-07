@@ -12,6 +12,7 @@ import AdministrationLoginScreen from "./Screen/AdministrationLoginScreen";
 import Admin from "./Screen/Admin";
 import adminNotices from "./Screen/AdminaddNotice";
 import EditAdminNotice from "./Components/EditAdminNotice";
+import ContactUs from "./Screen/ContactUs";
 
 
 
@@ -32,6 +33,9 @@ const App = () => {
 
         <Switch>
           <Route exact path="/registration" component={RegistrationScreen} />
+        </Switch>
+        <Switch>
+          <Route exact path="/contactus" component={ContactUs} />
         </Switch>
         <Switch>
           <Route exact path="/" component={Home} />
