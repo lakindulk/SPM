@@ -141,7 +141,7 @@ const Header = () => {
 
             {!hasToken && (
               <Nav.Link
-                href="/admin/notices"
+                href="/contactus"
                 className="custom-style-header-navlinks"
               >
                 <PhoneOutlined style={{ fontSize: "1.5em" }} />
