@@ -13,6 +13,7 @@ import Admin from "./Screen/Admin";
 import adminNotices from "./Screen/AdminaddNotice";
 import EditAdminNotice from "./Components/EditAdminNotice";
 import ContactUs from "./Screen/ContactUs";
+import adminContactMsgs from "./Components/adminContactMsgs"
 
 
 
@@ -54,6 +55,9 @@ const App = () => {
         </Switch>
         <Switch>
           <Route exact path="/admin/notices" component={adminNotices} />
+        </Switch>
+        <Switch>
+          <Route exact path="/admin/contactus" component={adminContactMsgs} />
         </Switch>
         <Switch>
           <Route exact path="/admin/notices/edit/:id" component={EditAdminNotice} />
