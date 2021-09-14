@@ -16,6 +16,9 @@ const Sidebar = () => {
                     <Link to="/admin/notices" style={{ color: 'white', textDecoration: 'inherit'}} ><i className="fa fa-bar-chart fa-lg"></i> Home Screen Management<hr className="bg-warning" /></Link>
                     </li>
                     <li className="nav-item">
+                    <Link to="/admin/contactus" style={{ color: 'white', textDecoration: 'inherit'}} ><i className="fa fa-bar-chart fa-lg"></i> Contact Us Messages<hr className="bg-warning" /></Link>
+                    </li>
+                    <li className="nav-item">
                     <Link to="/admin/paymentmanagement" style={{ color: 'white', textDecoration: 'inherit'}} ><i className="fa fa-wpforms fa-lg"></i> Payment Management<hr className="bg-warning" /></Link>
                     </li>
                    
