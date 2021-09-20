@@ -45,6 +45,16 @@ const App = () => {
         <Switch>
           <Route exact path="/profile/patient" component={Patient} />
         </Switch>
+         <Switch>
+          <Route exact path="/profile/patient/getServices" component={PatientProfile} />
+        </Switch>
+
+        <Switch>
+          <Route exact path="/profile/patient/myAppointments" component={MyAppointments} />
+        </Switch>
+        <Switch>
+          <Route exact path="/profile/patient/myPharmacyOrders" component={MyMedicineOrders} />
+        </Switch>
         <Switch>
           <Route exact path="/profile/labchemist" component={Labchemist} />
         </Switch>
