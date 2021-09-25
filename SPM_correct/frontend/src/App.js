@@ -13,7 +13,12 @@ import Admin from "./Screen/Admin";
 import adminNotices from "./Screen/AdminaddNotice";
 import EditAdminNotice from "./Components/EditAdminNotice";
 import ContactUs from "./Screen/ContactUs";
-import adminContactMsgs from "./Components/adminContactMsgs"
+import adminContactMsgs from "./Components/adminContactMsgs";
+import labreports from "./Screen/Labreports";
+import labreportAdd from "./Screen/LabreportAdd";
+import EditLabReport from "./Components/EditLabReport";
+import allRequests from "./Screen/AllRequestsLab"
+
 
 
 
@@ -61,6 +66,18 @@ const App = () => {
         </Switch>
         <Switch>
           <Route exact path="/admin/notices/edit/:id" component={EditAdminNotice} />
+        </Switch>
+        <Switch>
+          <Route exact path="/labchemist/labreports" component={labreports} />
+        </Switch>
+        <Switch>
+          <Route exact path="/labchemist/labreports/reportAdd" component={labreportAdd} />
+        </Switch>
+        <Switch>
+          <Route exact path="/labchemist/labreports/edit/:id" component={EditLabReport} />
+        </Switch>
+        <Switch>
+          <Route exact path="/labchemist/labreports/requests" component={allRequests} />
         </Switch>
         <Footer/>
       </main>
