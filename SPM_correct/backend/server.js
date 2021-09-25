@@ -11,6 +11,8 @@ const labchemistRoutes = require("./routes/labchemist-routes");
 const noticeRoutes = require("./routes/notices-routes");
 const adminRoutes=require("./routes/admin-routes");
 const contactusRoutes = require("./routes/contactus-routes");
+const labreportRoutes = require("./routes/labreport-routes");
+const reportrequest=require("./routes/reportrequest-routes");
 
 const app = express();
 
@@ -41,6 +43,9 @@ app.use("/codebusters/api/labchemistpvt",labchemistRoutes);
 app.use("/notice", noticeRoutes());
 app.use("/codebusters/api/admin",adminRoutes);
 app.use("/contactus",contactusRoutes());
+app.use("/labreport",labreportRoutes());
+app.use("/codebusters/api/doctorpvt/reportrequest", reportrequest);
+
 
 //event loop for server
 app.listen(PORT, () => {
