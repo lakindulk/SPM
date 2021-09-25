@@ -1,0 +1,38 @@
+
+@import url("https://cdn.syncfusion.com/ej2/material.css");
+.addRContainer{
+    background-color: rgb(158, 184, 194);
+    margin-left: 250px;
+    margin-right: 20px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    padding: 2.5em;
+    font-weight: 500;
+    font-size: 1.2em;
+    width: 55rem;
+    box-shadow: 62px -30px rgb(26, 83, 105);
+    height:52rem;
+    border-radius: 30px;
+}
+
+.repbtn{
+    width:250px;
+    height: 40px;
+    border-radius: 30px;
+    margin-top: 40px;
+    margin-left: 260px;
+    background-color: rgb(83, 92, 143);
+    border-color: rgb(0, 2, 3);
+    
+}
+
+.repbtn:hover{
+    background: rgb(7, 3, 44);
+    color: #baaece;
+    font-weight: 500;
+}
+
+
+
+
+
