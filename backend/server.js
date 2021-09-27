@@ -39,7 +39,7 @@ mongoose
 //use routes
 app.use("/codebusters/api/auth", authenticationRoutes);
 app.use("/codebusters/api/doctorpvt", doctorRoutes);
-app.use("/codebusters/api/notification", notificationRoute);
+app.use("/codebusters/api/pharmacistpvt/notification", notificationRoute);
 app.use("/codebusters/api/admin",adminRoutes);
 
 

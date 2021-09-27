@@ -72,11 +72,11 @@ function AddItem(){
                 </div>
                 <div>
                 <label for="mDate">Manufactured Date</label>    
-                <DatePicker required selected={Manu_Data} onChange={(date) => setManuDate(date)} />
+                <DatePicker required dateFormat="dd-MM-yyyy" selected={Manu_Data} onChange={(date) => setManuDate(date)} />
                 </div> <br/>   
                 <div>
                 <label for="eDate">Expiry Date</label>    
-                <DatePicker required selected={ExpireDate} onChange={(edate) => setExpireDate(edate)} />
+                <DatePicker required dateFormat="dd-MM-yyyy" selected={ExpireDate} onChange={(edate) => setExpireDate(edate)} />
                 </div>    
                 <br/><button type="submit" className="btn btn-primary">Add</button>
             </form>

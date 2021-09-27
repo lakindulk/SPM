@@ -1,4 +1,4 @@
-const NotificationModel = require("../models/notification-model");
+const NotificationModel = require("../models/salary-model");
 
 exports.updateNotification = async (req, res) => {
   const { nID } = req.body;

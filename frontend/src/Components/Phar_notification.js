@@ -17,11 +17,12 @@ const Phar_notification = (props) => {
       try {
         await axios
           .get(
-            "http://localhost:6500/codebusters/api/pharmacistpvt/getsalary/",
+            "http://localhost:6500/codebusters/api/pharmacistpvt/notification/getnotification",
           )
           
           .then((res) => {
-            setpharmacists(res.data.salary); 
+            console.log(res)
+            setpharmacists(res.data.allNotification); 
             console.log(pharmacists)                       
           })
           .catch((err) => {
@@ -39,56 +40,98 @@ const Phar_notification = (props) => {
   }, []);
   
  
-  return (
-    <div style={{paddingBottom:"4vh"}}>
-      
-  <input 
-          className="form-control"
-          type="text"
-          value={search}
-          placeholder="Search from date"
-          name="searchQuery"
-          onChange ={(e) =>{
-            setSearch(e.target.value);
-          }}
-        style= {{ width:"40vh"}}
-        />
-  
-    {pharmacists.filter(Notification => {
-                          if(search == ""){
-                              return Notification
-                          }
-                          else if(Notification.date.toLowerCase().
-                          includes(search.toLowerCase())){
-                            return Notification
-                        }
-                       
-                      }).map((Notification,index)=>
-    {
-      return(
-      <div  key={index}>
+  const renderTable = () => {
+    return pharmacists.map(pharmacist => {
+      return (
         
-{Notification.userId === props.resid && (
+        <Card >
+            <Card.Body>
+            <Card.Text>
+             Date:{pharmacist.date}
+             </Card.Text>
+            <Card.Text>
+            Salary :{pharmacist.salary}
+            </Card.Text>
+            </Card.Body>
+        </Card>
+        
+      )
+    })
+  }
+
+
+return(
+    <div className="container">
+        
+         <div className="StockTable">
+         <h4 align="middle">Notification</h4><br/>
+         
+         <Card >
+         <Card.Body>{renderTable()}</Card.Body>
+          </Card>
   
-        <div style={{paddingTop:"1vh",paddingRight:"2vh"}}>
+       
+        {/* <table className="table"> 
+    <thead className="thead-dark">
+      <tr>
+        <th>Not</th>
 
-<Card >
+      </tr>
+    </thead>
+    <tbody>{renderTable()}</tbody>
+  </table> */}
 
-          <Card.Body>
-    <Card.Title>{Notification.date}</Card.Title>
-    <Card.Text>
-    Salary :{Notification.salary}
-    </Card.Text>
-  </Card.Body>
-</Card>
+    </div> </div>
+)
+//     <div style={{paddingBottom:"4vh"}}>
+      
+//   <input 
+//           className="form-control"
+//           type="text"
+//           value={search}
+//           placeholder="Search from date"
+//           name="searchQuery"
+//           onChange ={(e) =>{
+//             setSearch(e.target.value);
+//           }}
+//         style= {{ width:"40vh"}}
+//         />
+  
+//     {pharmacists.filter(Notification => {
+//                           if(search == ""){
+//                               return Notification
+//                           }
+//                           else if(Notification.date.toLowerCase().
+//                           includes(search.toLowerCase())){
+//                             return Notification
+//                         }
+                       
+//                       }).map((Notification,index)=>
+//     {
+//       return(
+//       <div  key={index}>
+        
+// {Notification.userId === props.resid && (
+  
+//         <div style={{paddingTop:"1vh",paddingRight:"2vh"}}>
 
-</div>
-)}
-      </div>      
-    )}
-    )}
-  </div>
-  );
-};
+// <Card >
+
+//           <Card.Body>
+//     <Card.Title>{Notification.date}</Card.Title>
+//     <Card.Text>
+//     Salary :{Notification.salary}
+//     </Card.Text>
+//   </Card.Body>
+// </Card>
+
+// </div>
+// )}
+//       </div>      
+//     )}
+//     )}
+//   </div>
+  // )
+}
 
 export default Phar_notification;

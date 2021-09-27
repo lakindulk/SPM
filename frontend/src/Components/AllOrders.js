@@ -38,7 +38,7 @@ function AllOrders(){
                   />
               </td> 
               <td>{Order.status}</td> 
-              <div className="btn-toolbar"><td> <Link to={"/pharmacist/orders/delivery/"+Order._id}> <button type="button" className="btn btn-primary">Deliver</button></Link>
+              <div className="btn-tb"><td> <Link to={"/pharmacist/orders/delivery/"+Order._id}> <button type="button" className="btn btn-primary">Deliver</button></Link>
                   
               </td></div>
             </tr>
