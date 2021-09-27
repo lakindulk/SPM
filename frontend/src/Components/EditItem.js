@@ -3,6 +3,10 @@ import Pharmacist_Navbar from "./Pharmacist_header";
 import axios from "axios"
 import "./PFoarm.css"
 
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+
 
 
 const initialstate = {
@@ -71,8 +75,8 @@ export default class EditItem extends Component {
 
         axios.put(`http://localhost:6500/item/update/${id}`, Item)
             .then(response => {
-                alert('Item updated Successfully')
-                //window.location = "/pharmacist/stock";
+                alert('Item updated successfully')
+                window.location = "/pharmacist/stock";
             })
             .catch(error => {
                 console.log(error.message);
@@ -92,7 +96,7 @@ export default class EditItem extends Component {
                 <h4 align="middle">Edit Item</h4>
                 <form onSubmit={this.onSubmit} className="container">
                     <div className="mb-3">
-                        <label htmlFor="formGroupExampleInput" className="form-label"> Medi Name</label>
+                        <label htmlFor="formGroupExampleInput" className="form-label"> Medicine Name</label>
                         <input type="text"
                             className="form-control"
                             id="MediName"
@@ -135,6 +139,14 @@ export default class EditItem extends Component {
                             value={this.state.CompanyName}
                             onChange={this.onChange} />
                     </div>
+                    {/* <div>
+                    <label for="mDate">Manufactured Date</label>    
+                    <DatePicker required selected={Manu_Data} onChange={(date) => setManuDate(date)} />
+                    </div> <br/>   
+                    <div>
+                    <label for="eDate">Expiry Date</label>    
+                    <DatePicker required selected={ExpireDate} onChange={(edate) => setExpireDate(edate)} />
+                    </div>     */}
                     <div className="mb-3">
                         <button type="submit" className="btn btn-primary">Edit</button>
                     </div>

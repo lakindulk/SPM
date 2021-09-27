@@ -13,7 +13,7 @@ function Pharmacist_Navbar(){
   <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div className="navbar-nav">
       <div className="Nav-Stock"><a className="nav-item nav-link"  href="/pharmacist/stock">STOCK</a></div>
-      <div className="Nav-Order"><a className="nav-item nav-link" href="#">RECIEVED ORDERS</a></div>
+      <div className="Nav-Order"><a className="nav-item nav-link" href="/pharmacist/orders">RECIEVED ORDERS</a></div>
       
     </div>
   </div>

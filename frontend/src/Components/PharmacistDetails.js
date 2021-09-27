@@ -58,11 +58,11 @@ const PharmacistDetails = (props) => {
 
 
   if(!email.includes('@')){
-        emailErr.nonAt="Cannot insert email without @ sign"
+        emailErr.nonAt="Can't insert email without @ sign. Please check the email again"
         isValid = false;
   }
   if((phone.length > 10) || (phone.length <10)){
-        phnErr.invalidPhn= "Invalid phone number"
+        phnErr.invalidPhn= "Invalid phone number. Please insert a valid phone number"
         isValid=false;
   }
   setEmailErr(emailErr);
@@ -175,7 +175,7 @@ const PharmacistDetails = (props) => {
         )
         .then((res) => {
           console.log(props.resUsername);
-          alert("Pharmacist Update Successfully!");
+          alert("Pharmacist Updated Successfully!");
           window.location.reload();
         })
         .catch((err) => {

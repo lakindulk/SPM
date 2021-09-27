@@ -8,11 +8,15 @@ router.route("/add").post((req,res)=>{
    const Amount = Number(req.body.Amount);
    const Cost = Number(req.body.Cost);
    const CompanyName = req.body.Company_Name;
+   const ManuDate = Date(req.body.ManuDate);
+   const ExpireDate = Date(req.body.ExpireDate);
    
+   console.log(ManuDate);
+   console.log(ExpireDate);
    
    console.log("Medicine name is:"+MediName)
 
-   const newItem = new Item({MediName,Amount,Cost,CompanyName});
+   const newItem = new Item({MediName,Amount,Cost,CompanyName,ManuDate,ExpireDate});
                   
                   //If successfully added
    newItem.save().then(()=>{
@@ -45,6 +49,8 @@ router.route("/update/:id").put(async(req,res) => {
         Amount,
         Cost,
         CompanyName
+        // ManuDate,
+        // ExpireDate
     }
     const update = await Item.findByIdAndUpdate(userId, updateItem).then(()=>{
         res.status(200).send({status:"Item updated"})

@@ -15,7 +15,11 @@ import Reportxx from "./Components/Reqestreport";
 import AddItem from "./Components/AddItem";
 import AllStockItem from "./Components/AllStock"
 import EditItem from "./Components/EditItem";
-
+import AllOrders from "./Components/AllOrders";
+import OrderDeliver from "./Components/OrderDelivery";
+import AddFeedback from "./Components/Feedback";
+import AllFeedbacks from "./Components/AllFeedbacks";
+import Phar_notification from "./Components/Phar_notification";
 
 
 const App = () => {
@@ -57,6 +61,9 @@ const App = () => {
           <Route exact path="/profile/pharmasist" component={Pharmasist} />
         </Switch>
         <Switch>
+          <Route exact path="/profile/pharmasist/notification" component={Phar_notification} />
+        </Switch>
+        <Switch>
           <Route path="/pharmacist/stock/add" exact component={AddItem}/>
         </Switch>
         <Switch>
@@ -65,7 +72,19 @@ const App = () => {
         <Switch>
           <Route path="/pharmacist/stock/edit/:id" exact component={EditItem}/>
         </Switch>
-        
+        <Switch>
+          <Route path="/pharmacist/orders" exact component={AllOrders}/>
+        </Switch>
+        <Switch>
+          <Route path="/pharmacist/orders/delivery/:id" exact component={OrderDeliver}/>
+        </Switch>
+        <Switch>
+          <Route path="/feedback/add" exact component={AddFeedback}/>
+        </Switch>
+        <Switch>
+          <Route path="/admin/feedbacks" exact component={AllFeedbacks}/>
+        </Switch>
+       
      <Footer/>
 
      

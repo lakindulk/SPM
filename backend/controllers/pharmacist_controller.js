@@ -182,5 +182,21 @@ exports.deletePharmacistDetails = async (req, res) => {
       });
     }
   };
+
+
+  //fetch salary
+exports.getsalary = async (req, res) => {
+  try {
+    const salary = await Salary.find();
+    res.status(200).send({
+      salary,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      desc: "Error in getlabreport controller-" + error,
+    });
+  }
+};
   
   

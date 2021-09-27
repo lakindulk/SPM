@@ -13,6 +13,7 @@
 }
 .btn-primary{
     margin-right: 2vh;
+    
     }
 .item-edit-container{
     margin-left: 30vh;
@@ -41,4 +42,32 @@
 }
 .custom-body{
     margin-bottom: 10vh;
+}
+.repgen{
+    margin-top: 5vh;
+}
+.btn-sm{
+    background-color:rgb(108, 108, 233);
+    margin-left: 1vh;
+
+    
+}
+.img{
+    width: 200px;  
+height: 200px;  
+text-align: center;  
+padding: 15px;
+   
+ }
+.OrderTable{
+    margin-left: 20vh;
+    margin-right: 20vh;
+    margin-bottom: 10vh;
+    
+} 
+.btn-toolbar{
+    margin-top: 10vh;
+}
+.data{
+    margin-top: 200vh;
 }

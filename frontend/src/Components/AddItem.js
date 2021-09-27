@@ -2,7 +2,9 @@ import React,{useState} from "react";
 import Pharmacist_Navbar from "./Pharmacist_header";
 import axios from "axios";
 import "./PFoarm.css"
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
 
 
 function AddItem(){
@@ -10,11 +12,15 @@ function AddItem(){
     const[Amount,setAmount] = useState("");
     const[Cost,setCost] = useState("");
     const[Company_Name,setCompanyName] = useState("");
-
+    const[Manu_Data,setManuDate] = useState("");
+    const[ExpireDate,setExpireDate] = useState("");
+     
+    
     function sendData(e){
         e.preventDefault();
-       
-        const newItem = {Medi_Name,Amount,Cost,Company_Name}
+        
+        console.log(ExpireDate)
+        const newItem = {Medi_Name,Amount,Cost,Company_Name,Manu_Data,ExpireDate}
         console.log(newItem)
 
         axios.post("http://localhost:6500/item/add/",newItem).then(()=>{
@@ -62,9 +68,16 @@ function AddItem(){
                 <input type="text" className="form-control" id="Cname" required placeholder="Enter Company Name"
                  onChange={(e)=>{
                     setCompanyName(e.target.value);
-                }}/>
+                }}/> <br/>
                 </div>
-  
+                <div>
+                <label for="mDate">Manufactured Date</label>    
+                <DatePicker required selected={Manu_Data} onChange={(date) => setManuDate(date)} />
+                </div> <br/>   
+                <div>
+                <label for="eDate">Expiry Date</label>    
+                <DatePicker required selected={ExpireDate} onChange={(edate) => setExpireDate(edate)} />
+                </div>    
                 <br/><button type="submit" className="btn btn-primary">Add</button>
             </form>
             </div>

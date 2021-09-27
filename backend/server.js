@@ -51,7 +51,13 @@ app.use("/codebusters/api/pharmacistpvt", pharmacistRoutes);
 const itemRoutes = require("./routes/item_routes");
 app.use("/item",itemRoutes)
 
+//Pharmacist Order routes
+const DeliveryRoutes = require("./routes/recieved-order-routes");
+app.use("/order",DeliveryRoutes)
 
+//Feedback routes
+const FeedbackRoutes = require("./routes/feedback_routes")
+app.use("/feedback",FeedbackRoutes)
 //event loop for server
 app.listen(PORT, () => {
   console.log(`Backend Server is running on port ${PORT}`);
