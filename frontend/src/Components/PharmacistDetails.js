@@ -207,27 +207,25 @@ const PharmacistDetails = (props) => {
   return (
     <div className="navigation-panel">
       <ListGroup variant="flush">
-        <ListGroup.Item className="lkcustom-pp">
+        <ListGroup.Item className="lkcustom-pp" >
 
-        <img style={{ paddingBottom: "40vh", paddingTop: "5px" }} src={image} height={500} width={300} alt="" />
+        <img style={{ paddingBottom: "40vh", paddingTop: "5px", marginBottom:"10vh", width:250 }} src="https://res.cloudinary.com/dzvbjfdsz/image/upload/v1632813937/pharm.98ecef87_nggt7f.jpg" height={500} width={300} alt="" />
         
         </ListGroup.Item>
-        <ListGroup.Item> User Name: {props.resUsername}</ListGroup.Item>
+        <div className="dwd"  style={{marginTop:"5vh"}}>
+        <ListGroup.Item > User Name: {props.resUsername}</ListGroup.Item>
         <ListGroup.Item>Email:  {props.resEmail}</ListGroup.Item>
         <ListGroup.Item>Full Name: {props.resfullname}</ListGroup.Item>
         <ListGroup.Item>License Number: {props.reslicense}</ListGroup.Item>
         <ListGroup.Item>Phone Number: {props.resphone}</ListGroup.Item>
-        
+        </div>
         <ListGroup.Item>
-          <Button  onClick={handleShow} size="sm" variant="outline-primary">
+        <button type="button" className="btn btn-primary" style={{marginBottom:"2vh",marginTop:"2vh"}} onClick={handleShow} size="sm" variant="outline-primary">
             Edit Details
-          </Button>{" "}
-          <Button onClick={showModal3} size="sm" variant="outline-danger">
+          </button>{" "}
+          <button type="button" className="btn btn-danger" onClick={showModal3} size="sm" variant="outline-danger">
             Delete Account
-          </Button>{" "}
-          {/* <Button onClick={handleShow2} size="sm" variant="outline-success">
-            Update Picture
-          </Button>{" "} */}
+          </button>{" "}
         </ListGroup.Item>
       </ListGroup>
 

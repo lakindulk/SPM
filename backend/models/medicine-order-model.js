@@ -39,7 +39,7 @@ const MedicineOrderSchema = new mongoose.Schema({
         default:"Pending"
        
     },
-    telephone:
+    telNo:
     {
         type:Number,
     }

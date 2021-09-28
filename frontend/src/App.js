@@ -19,7 +19,7 @@ import AllOrders from "./Components/AllOrders";
 import OrderDeliver from "./Components/OrderDelivery";
 import AddFeedback from "./Components/Feedback";
 import AllFeedbacks from "./Components/AllFeedbacks";
-import Phar_notification from "./Components/Phar_notification";
+
 
 
 const App = () => {
@@ -59,9 +59,6 @@ const App = () => {
         </Switch>
         <Switch>
           <Route exact path="/profile/pharmasist" component={Pharmasist} />
-        </Switch>
-        <Switch>
-          <Route exact path="/profile/pharmasist/notification" component={Phar_notification} />
         </Switch>
         <Switch>
           <Route path="/pharmacist/stock/add" exact component={AddItem}/>

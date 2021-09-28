@@ -31,7 +31,7 @@ function AddFeedback(){
     
         <div className="container">
              <Pharmacist_Navbar/>
-             <div className="formAllign">
+             <div className="formset">
             <div className="container"> <h4 align="middle">Feedback</h4>
             <p>Your feedbacks are essential to guide and inform our decision making and influence innovations and changes to our service.
                  It's also essential for measuring your satisfaction among our current customers.

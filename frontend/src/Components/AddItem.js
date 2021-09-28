@@ -38,7 +38,7 @@ function AddItem(){
     
         <div className="container">
              <Pharmacist_Navbar/>
-             <div className="formAllign">
+             <div className="formset">
             <div className="container"> <h4 align="middle">Add Item</h4>
             
             <form onSubmit={sendData}>

@@ -1,4 +1,4 @@
-.formAllign{
+.formset{
         margin-left: 30vh;
         margin-right: 30vh;
         margin-bottom: 20vh;
@@ -63,6 +63,7 @@ padding: 15px;
     margin-left: 20vh;
     margin-right: 20vh;
     margin-bottom: 10vh;
+    margin-top: 10vh;
     
 } 
 .btn-tb{
@@ -70,4 +71,16 @@ padding: 15px;
 }
 .data{
     margin-top: 200vh;
+}
+.addItembtn{
+    /* margin-left: 145.5vh; */
+    margin-right: 145.5vh;
+    
+}
+.searchbx{
+    margin-left: 55.5vh;
+    padding-bottom: 5px;
+    margin-bottom: 3vh;
+    padding-right:32vh ;
+
 }

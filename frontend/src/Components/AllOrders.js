@@ -29,15 +29,15 @@ function AllOrders(){
           return (
             <tr>
               
-              <td>{Order.name}</td>
+              <td style={{paddingTop:"12vh"}}>{Order.name}</td>
               {/* <td>{Order.MediList}</td> */}
-              <td>{Order.address}</td> 
-              <td>{Order.telephone}</td>
+              <td style={{paddingTop:"12vh"}}>{Order.address}</td> 
+              <td style={{paddingTop:"12vh"}}>{Order.telNo}</td>
               <td><Image className="img"
                   cloudName="/iplus/image/upload/" publicId={Order.photo}
                   />
               </td> 
-              <td>{Order.status}</td> 
+              <td style={{paddingTop:"12vh"}}>{Order.status}</td> 
               <div className="btn-tb"><td> <Link to={"/pharmacist/orders/delivery/"+Order._id}> <button type="button" className="btn btn-primary">Deliver</button></Link>
                   
               </td></div>

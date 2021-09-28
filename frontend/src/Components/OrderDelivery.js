@@ -9,7 +9,7 @@ function OrderDeliver(e){
     const[name,setname] = useState("");
     const[address,setaddress] = useState("");
     const[photo,setphoto] = useState("");
-    const[telephone,settelephone] = useState("");
+    const[telNo,settelNo] = useState("");
     const[status,setstatus] = useState("");
     const [age,setage]= useState("");
     const [email,setemail]= useState("");
@@ -31,7 +31,7 @@ function OrderDeliver(e){
                 
                 setname(res.data.forder.name)
                 setaddress(res.data.forder.address)
-                settelephone(res.data.forder.telephone)
+                settelNo(res.data.forder.telNo)
                 setstatus("Delivered")
                 setphoto(res.data.forder.photo)
                 setage(res.data.forder.age)
@@ -57,7 +57,7 @@ function OrderDeliver(e){
             e.preventDefault();
            
           
-            const deliveredOrder={status,name,age,email,gender,address,allergies,currentlyTakingMedications,existingMedicalProblems,userID,signature,photo,telephone}
+            const deliveredOrder={status,name,age,email,gender,address,allergies,currentlyTakingMedications,existingMedicalProblems,userID,signature,photo,telNo}
             console.log(deliveredOrder)
             axios.put(`http://localhost:6500/order/deliver/${order_id.id}`,deliveredOrder).then(()=>{
                 
@@ -74,6 +74,7 @@ function OrderDeliver(e){
 return(
     <div className="container">
              <Pharmacist_Navbar/>
+             <div className="formset">
              <h4 align="middle">Order Deliver</h4>
             <form  onSubmit={StatusChange}>
                 <div className="form-group">
@@ -92,9 +93,9 @@ return(
                 </div><br/>
                 <div className="form-group">
                 <label for="TeleNo">Telephone Number</label>
-                <input type="number" className="form-control" id="TeleNo"  placeholder="" defaultValue={telephone}
+                <input type="number" className="form-control" id="TeleNo"  placeholder="" defaultValue={telNo}
                  onChange={(e)=>{
-                    settelephone(e.target.value);
+                    settelNo(e.target.value);
                 }}/>
                 </div><br/>
                 <div className="form-group">
@@ -107,6 +108,7 @@ return(
   
                 <button type="submit" className="btn btn-primary">Deliver</button>
             </form>
+            </div>
                     </div>
 )
 }

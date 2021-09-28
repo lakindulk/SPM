@@ -58,7 +58,7 @@ router.route("/deliver/:id").put(async(req,res) => {
     const name=(req.body.name)
     const address=(req.body.address)
     const photo=(req.body.photo)
-    const telephone=Number(req.body.telephone)
+    const telNo=Number(req.body.telNo)
     const age = Number(req.body.age)
     const email = (req.body.email)
     const gender = (req.body.gender)
@@ -82,7 +82,7 @@ router.route("/deliver/:id").put(async(req,res) => {
         userID,
         signature,
         photo,
-        telephone
+        telNo
         
     }
     console.log(updateStatus)

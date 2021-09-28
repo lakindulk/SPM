@@ -120,13 +120,14 @@ function AllStockItem(){
              <Pharmacist_Navbar/>
              <div className="StockTable">
              <h4 align="middle">Stock Items</h4><br/>
+             <div className="searchndadbtn">
              <Link to="/pharmacist/stock/add">
-                    <button type="button" className="btn btn-primary">Add New Item</button>
+                   <div className="addItembtn"> <button type="button" className="btn btn-primary">Add New Item</button></div>
             </Link>
             
-            {/* <Button variant="outline-dark" onClick = {()=>handlepdf(Item.Medi_Name)} >Generate Report</Button> */}
            
-           <input type="text" placeholder="Search..." onChange={event=>{setSearchTerm(event.target.value)}}/>
+           <input type="text" className="searchbx" placeholder="Search..." onChange={event=>{setSearchTerm(event.target.value)}}/>
+           </div>
             <table className="table"> 
             
         <thead className="thead-dark">
@@ -141,7 +142,19 @@ function AllStockItem(){
           </tr>
         </thead>
         <tbody> 
-      { stockItems.map(item => {
+      { stockItems.filter((item)=>{
+        if(searchTerm==""){
+          return item
+        }
+        else if(item.MediName.toLowerCase().includes(searchTerm.toLowerCase())){
+          return item
+        }
+        else if(item.CompanyName.toLowerCase().includes(searchTerm.toLowerCase())){
+          return item
+        }
+        
+        
+      }).map(item => {
         return (
           <tr>
             <td>{item.MediName}</td>

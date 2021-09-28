@@ -42,7 +42,7 @@ function AllFeedbacks(){
             <table className="table"> 
         <thead className="thead-dark">
           <tr>
-            <th>Name</th>
+            <th style={{paddingRight:50}}>Name</th>
             <th>Comment</th>
           </tr>
         </thead>
