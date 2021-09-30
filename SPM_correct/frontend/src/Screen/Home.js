@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from '../Components/Button.js';
 import '../Components/HomeSection.css';
+import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import Card from "../Components/Cards"
 import axios from "axios";
 
@@ -24,11 +25,11 @@ function Home() {
     }, [])
 
     return (
-        <div className='home-container'>
+        <div className='home-container' style={{ paddingBottom: "9vh" }}>
             <video src="/videos/video-4.mp4" autoPlay loop muted />
-            <div style={{ paddingTop: "6vh", paddingBottom: "3vh" }}>
+            <div style={{ paddingTop: "5.2vh", paddingBottom: "3vh" }}>
                 <h1>The best solution for your clinical journey</h1>
-                <p><b>Handle your workflow and enable online doctor appointment, medical records and medicine...</b></p>
+                <p><b>Handle your workflow and enable online doctor appointments, medical records and medicine...</b></p>
             </div>
             <div style={{ paddingBottom: "3vh" }}>
                 <Button className='btn' buttonStyle='btn--outline'
@@ -39,7 +40,7 @@ function Home() {
 
             </div>
             <div style={{ paddingTop: "1vh", paddingBottom: "6vh" }}>
-                <h2><b>Get all services effectively by SignUp to iCross</b></h2>
+                <h2><b>Get all services effectively by SignUp to ICROSS</b></h2>
                 <br /><br />
                 <h1 style={{ fontFamily: 'Times New Roman' }}>..Notices for You..</h1>
             </div>
@@ -48,12 +49,12 @@ function Home() {
                 {notices.length > 0 && notices.map((item, index) =>
                 (
                     <div key={index} className="singleNotice">
-                       <div className="row">
+                        <div className="row">
                             <div className="col">
                                 <b><label>{item.topic}</label> </b>
                             </div>
                             <div className="col">
-                                <label>{item.date}</label>
+                                <label><DatePickerComponent value={item.date} style={{ fontSize: "19px" }} readOnly /></label>
                             </div>
                         </div>
                         <div className="row">
@@ -72,7 +73,7 @@ function Home() {
                         <Card
                             title='Doctor'
                             imageUrl='images/image-1.jpg'
-                            body='You can get services from a doctor. Put an appoinment and get your treatments.'
+                            body='You can get services from a doctor. Put an appointment and get your treatments.'
                         />
                     </div>
                 </div>
@@ -82,7 +83,7 @@ function Home() {
                         <Card
                             title='Lab Chemist'
                             imageUrl='images/image-2.jpg'
-                            body='Highly qualified lab chemist staff to provide your acctual medical tests results. '
+                            body='Highly qualified lab chemist staff to provide your actual medical tests results. '
                         />
                     </div>
                 </div>
@@ -92,7 +93,7 @@ function Home() {
                         <Card
                             title='Pharmacist'
                             imageUrl='images/image-3.jpg'
-                            body='Medicines to your door step. Order medicines and we are await to provide the service'
+                            body='Medicines to your doorstep. Order medicines. We are happy to provide the service to you.'
                         />
                     </div>
                 </div>
