@@ -34,30 +34,53 @@ const PatientSchema = new mongoose.Schema({
   
   gender:{
     type:String,
-    default:'undefined'
+    
   },
 
   bloodGroup:{
     type:String,
-    default:'undefined'
+    
   },
 
   address:{
     type:String,
-    default:'undefined'
+    
   },
 
   zipcode:{
     type: String,
-    default:'undefined'
+    
   },
 
   nicNumber:{
     type:String,
-    default:'undefined'
+    
   },
 
+  avatar: {
+    type: String,
+    default: 'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png'
+  },
 
+  appoinment : [
+    {
+      appointmentDate:{
+        type:String,
+      },
+      appointmentTime:{
+        type:String,
+      },
+      physician:{
+        type:String,
+      },
+      patientName:{
+        type:String,
+      },
+      appointmentNote:{
+        type:String,
+      }
+    }
+  ]
 });
 
 //by using "pre save" we run this code segment before mongoose save data on db
