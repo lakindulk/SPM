@@ -7,10 +7,11 @@ import autoTable from 'jspdf-autotable';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 
-const Labreport = () => {
+const Labreport = (props) => {
     const [labreports, setLabReports] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
+    const [search, setSearch] = useState("");
 
 
     const handlepdf = (testId, testName, patientName, date, patientEmail, description, chemistName, docName) => {
@@ -125,104 +126,117 @@ const Labreport = () => {
                 </div>
 
             </div>
-
-            {/* <div >
-                <input className="searchtext" onChange ={(e) =>{setSearch(e.target.value);}} name="searchQuery" value={search} type="search" placeholder="  Search Lab Report" />
-            </div> */}
-
-
             <div className="topics">Previous Lab Reports</div>
+
+
+            <div >
+                <input className="searchtext"
+                    onChange={(e) => {
+                        setSearch(e.target.value);
+                    }}
+                    name="searchQuery"
+                    value={search}
+                    type="search"
+                    placeholder="  Enter patient name for search lab report" />
+            </div>
+
+
             <div container className="testDisplay">
 
-                {labreports && labreports.length > 0
-                    ? labreports.map((item, report) => {
-                        return <div key={report} className="singleTest">
-                            <div style={{ marginTop: 20, marginLeft: 20, marginRight: 50 }}>
+
+                {labreports.filter(Labreport => {
+                    if (search === "") {
+                        return Labreport
+                    }
+                    else if (Labreport.patientName.toLowerCase()
+                        .includes(search.toLowerCase())) {
+                        return Labreport
+                    }
+
+                }).map((Labreport, index) => {
+                    return (
+                        <div key={index}>
+
+
+                            <div className="singleTest">
+                                <div style={{ marginTop: 20, marginLeft: 20, marginRight: 50 }}>
 
 
 
-                                <div className="noticeContainer">
-                                    <tr>
-                                        <td>
-                                            <div className="row">
-                                                <div className="col">
-                                                    <b><label>Test Id : {item.testId}</label> </b>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="rowcolumn">
+                                    <div className="noticeContainer">
+                                        <tr>
+                                            <td>
+                                                <div className="row">
                                                     <div className="col">
-                                                        <label>Test : {item.testName}</label>
-                                                    </div></div>
-                                                <div className="col">
-                                                    <label>Patient Name : {item.patientName}</label>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="rowcolumn">
-                                                    <div className="col">
-                                                        <DateTimePickerComponent value={item.date} style={{ fontSize: "19px" }} readOnly />
+                                                        <b><label>Test Id : {Labreport.testId}</label> </b>
                                                     </div>
                                                 </div>
-                                                <div className="rowcolumn">
+                                                <div className="row">
+                                                    <div className="rowcolumn">
+                                                        <div className="col">
+                                                            <label>Test : {Labreport.testName}</label>
+                                                        </div></div>
                                                     <div className="col">
-                                                        <label>Patient Email : {item.patientEmail}</label>
+                                                        <label>Patient Name : {Labreport.patientName}</label>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <div className="row">
-                                                <div className="uppermargin">
-                                                    <div className="col">
-                                                        <label>Test Result : {item.description}</label>
+                                                <div className="row">
+                                                    <div className="rowcolumn">
+                                                        <div className="col">
+                                                            <DateTimePickerComponent value={Labreport.date} style={{ fontSize: "19px" }} readOnly />
+                                                        </div>
+                                                    </div>
+                                                    <div className="rowcolumn">
+                                                        <div className="col">
+                                                            <label>Patient Email : {Labreport.patientEmail}</label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="uppermargin">
+
+                                                <div className="row">
+                                                    <div className="uppermargin">
+                                                        <div className="col">
+                                                            <label>Test Result : {Labreport.description}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="uppermargin">
+                                                        <div className="col">
+                                                            <label>Lab test done by chemist {Labreport.chemistName}.</label>
+                                                        </div></div>
+                                                </div>
+                                                <div className="row">
                                                     <div className="col">
-                                                        <label>Lab test done by chemist {item.chemistName}.</label>
-                                                    </div></div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col">
-                                                    <label>Patient will diagnose by doctor {item.docName}.</label>
+                                                        <label>Patient will diagnose by doctor {Labreport.docName}.</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div style={{ fontSize: 20, paddingTop: "3vh" }} className="row">
-                                                <div className="col">
+                                                <div style={{ fontSize: 20, paddingTop: "3vh" }} className="row">
+                                                    <div className="col">
 
-                                                    <Link to={"/labchemist/labreports/edit/" + item._id}><button className="actionbtnE" > Edit</button></Link>
+                                                        <Link to={"/labchemist/labreports/edit/" + Labreport._id}><button className="actionbtnE" > Edit</button></Link>
+                                                    </div>
+                                                    <div className="col">
+                                                        <button onClick={() => handlepdf(Labreport.testId, Labreport.testName, Labreport.patientName, Labreport.date, Labreport.patientEmail, Labreport.description, Labreport.chemistName, Labreport.docName)} className="actionbtnE">Report PDF</button>
+                                                    </div>
+                                                    <div className="col">
+                                                        <button onClick={() => deletereport(Labreport._id)} className="actionbtnR">Remove</button>
+                                                    </div>
                                                 </div>
-                                                <div className="col">
-                                                    <button onClick={() => handlepdf(item.testId, item.testName, item.patientName, item.date, item.patientEmail, item.description, item.chemistName, item.docName)} className="actionbtnE">Report PDF</button>
-                                                </div>
-                                                <div className="col">
-                                                    <button onClick={() => deletereport(item._id)} className="actionbtnR">Remove</button>
-                                                </div>
-                                            </div>
 
 
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
 
+                                    </div>
                                 </div>
                             </div>
+
+
                         </div>
-
-
-                    })
-                    : <Button variant="primary" disabled>
-                        <Spinner
-                            as="span"
-                            animation="border"
-                            size="sm"
-                            role="status"
-                            aria-hidden="true"
-                        />{"     "}
-                        No Data Added or Network Error...
-                    </Button>}
-
+                    )
+                }
+                )}
 
             </div>
         </div>
@@ -230,3 +244,22 @@ const Labreport = () => {
 };
 
 export default Labreport;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
