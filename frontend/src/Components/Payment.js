@@ -67,6 +67,9 @@ const Payment = () => {
   return (
     <div >
       <h1 style={{marginLeft: '180px', marginTop: '50px', marginBottom: '30px'}}>Daily Payment For Service</h1>
+      <h3 style={{marginLeft: '100px', marginTop: '50px', marginBottom: '30px', color:"brown"}}>Doctor Basic Salary : Rs. 2000.00</h3>
+      <h3 style={{marginLeft: '100px', marginTop: '50px', marginBottom: '30px', color:"purple"}}>Lab Chemist Basic Salary : Rs. 800.00</h3>
+      <h3 style={{marginLeft: '100px', marginTop: '50px', marginBottom: '30px', color:"gold"}}>Pharmasist Basic Salary : Rs. 500.00</h3>
     
       <Table striped bordered hover>
         <tbody>
