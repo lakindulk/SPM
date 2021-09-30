@@ -2,9 +2,12 @@ const DoctorModel = require("../models/doctor-model");
 const AllUsersModel = require("../models/allusers-model");
 const NotificationModel=require("../models/notification-model");
 const PatientModel=require("../models/patient-model");
+const AppointmentModel=require("../models/appointment-model");
 const TreatmentModel=require("../models/treatment-model");
 const { cloudinary } = require("../utils/cloudinary");
-
+const Reportrequest=require("../models/report-requesrt");
+const LabReport=require("../models/labreport-model");
+const Salary=require("../models/salary-model");
 //CRUD operations of doctor 
 
 //fetch doctor details
@@ -81,11 +84,8 @@ exports.updateDoctorDetails = async (req, res) => {
   
   //Update doctor profile photo
 exports.updateProfilePicture = async (req, res) => {
-    const { fileEnc } = req.body;
-  
-    try {
-     
-      
+    const { fileEnc } = req.body; 
+    try {      
         try {
           const uploadedResponse = await cloudinary.uploader.upload(fileEnc, {
             upload_preset: "doctor-profile-pictures",
@@ -149,6 +149,8 @@ exports.deleteDoctorDetails = async (req, res) => {
       });
     }
   };
+
+// ..........................................................................................
 
 // add treatment
 exports.addtreatment = async (req, res) => {
@@ -221,64 +223,77 @@ exports.updatetreatment = async (req, res) => {
   }
 };
 
-
 //remove treatmant data
-
-
-// add report request
-exports.addreportrequest = async (req, res) => {
-  const { patientname, patientsdescription, docnote, reporttype1,reporttype2,othertype } =
-    req.body;
-    const data = {
-      fromId: req.user._id,
-      subject: "Report request to a patient",
-      desc: req.body.patient,
-      
-    };
+exports.removetreatmentdata= async (req, res) => {
   try {
-    
-    const Report = {
-      patientname, 
-      patientsdescription, 
-      docnote, 
-      reporttype1,
-      reporttype2,
-      othertype
-    };
+    const tid=req.params.id;
 
-    const newReport= await DoctorModel.findOneAndUpdate(
-      { _id: req.user._id },
-      { $push: { Report: Report } },
-      {
-        new: true,
-      }
-    );
-    const result = await sendNotification(data, res);
-    if (result) {
-    res.status(201).send({ newReport,success: true, result });
-    }
+    await TreatmentModel.findByIdAndDelete(tid);
+    
+    res.status(200).send({
+      status: true,
+      desc: "deleted from the db",
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
-      desc: "Error in doctor addreportrequest controller-" + error,
+      desc: "Error in deletedata  controller-" + error,
     });
   }
 };
 
-// edit report request
-exports.updatereportrequest = async (req, res) => {
-  const {  patientsdescription, docnote, reporttype1 ,reporttype2,othertype, rID } = req.body;
+
+// ..........................................................................................
+
+// add repoertrequest
+exports.addrepoertrequest = async (req, res) => {
+  const { docname,docemail,patient, patientsdescription, docnote, reporttype1,reporttype2,othertype} =
+    req.body;
+  
+    try {    
+      const reportrequest = await Reportrequest.create({
+        docname,
+        docemail,
+        patient, 
+        patientsdescription, 
+        docnote, 
+        reporttype1,
+        reporttype2,
+        othertype
+      });
+      res.status(201).json({ success: true, reportrequest });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        desc: "Error in addrepoertrequest  controller-" + error,
+      });
+    }  
+};
+
+//fetch repoertrequest
+exports.getrepoertrequest = async (req, res) => {
   try {
-    const result = await DoctorModel.findOneAndUpdate(
-      { "Report._id": rID },
+    const Repoertrequest = await Reportrequest.find();
+    res.status(200).send({
+      Repoertrequest,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      desc: "Error in gettrepoertrequest controller-" + error,
+    });
+  }
+};
+
+// edit repoertrequest
+exports.editrepoertrequest = async (req, res) => {
+  let { tID,patient, patientsdescription, docnote, reporttype1,reporttype2,othertype} = req.body;
+  try {
+    const updatedrepoertrequest = await Reportrequest.findByIdAndUpdate(
+      tID,
       {
         $set: {
-          "Report.$.patientsdescription": patientsdescription,
-          "Report.$.docnote": docnote,
-          "Report.$.reporttype1": reporttype1,
-          "Report.$.reporttype2": reporttype2,
-          "Report.$.othertype": othertype,
-          
+          patient, patientsdescription, docnote, reporttype1,reporttype2,othertype
         },
       },
       {
@@ -287,42 +302,99 @@ exports.updatereportrequest = async (req, res) => {
         omitUndefined: true,
       }
     );
-    res.status(200).json({ success: true, desc: " Report request data updated", result });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      desc: "Error in updatereportrequest controler-" + error,
-    });
-  }
-};
-
-
-//remove treatmant data
-exports.removereportrequest= async (req, res) => {
-  const { rID } = req.body;
-  try {
-    const updatetreatment = await DoctorModel.updateOne(
-      { _id: req.user._id },
-      { $pull: { Report: { _id: rID } } },
-      {
-        new: true,
-      }
-    );
-    res.status(200).json({
+    res.status(200).send({
       success: true,
-      desc: " Report data deleted",
-      updatetreatment,
+      desc: "repoert request data updated successfully",
+      updatedrepoertrequest,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      desc: "Error in removereportrequest controler-" + error,
+      desc: "Error in repoertrequest controller-" + error,
     });
   }
 };
 
 
+//remove delete repoertrequest data
+exports.deleterepoertrequest= async (req, res) => {
+  try {
+    const tid=req.params.id;
 
+    await Reportrequest.findByIdAndDelete(tid);
+    
+    res.status(200).send({
+      status: true,
+      desc: "deleted from the db",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      desc: "Error in deleterepoertrequest  controller-" + error,
+    });
+  }
+};
+
+exports.deletedata = async (req, res) => {
+  try {
+    const rid=req.params.id;
+
+    await AppointmentModel.findByIdAndDelete(rid);
+    
+    res.status(200).send({
+      status: true,
+      desc: "deleted from the db",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      desc: "Error in deletedata  controller-" + error,
+    });
+  }
+};
+
+//fetch labreports
+exports.getlabreport = async (req, res) => {
+  try {
+    const labreport = await LabReport.find();
+    res.status(200).send({
+      labreport,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      desc: "Error in getlabreport controller-" + error,
+    });
+  }
+};
+
+//remove removelabreport data
+exports.removelabreport= async (req, res) => {
+  try {
+    const lid=req.params.id;
+    await LabReport.findByIdAndDelete(lid);    
+    res.status(200).send({
+      status: true,
+      desc: "deleted from the db",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      desc: "Error in deletedata  controller-" + error,
+    });
+  }
+};
+
+//delete labreport
+exports.deleteLabreport = async (req,res) => {
+  let testId =req.params.id;
+  await LabReport.findByIdAndDelete(testId)
+  .then(() => {
+    res.status(200).send({status: "Report Deleted"})
+  }).catch((error) => {
+    res.status(500).send({status: "error in deleting Labreport",error: error.message})
+  })
+}
 
 const sendNotification = async (data, res) => {
   try {
@@ -346,3 +418,32 @@ const sendNotification = async (data, res) => {
   }
 };
 
+//get doc details
+exports.getdoc = async (req, res) => {
+  try {
+    const doc = await DoctorModel.find();
+    res.status(200).send({
+      doc,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      desc: "Error in getdoc controller-" + error,
+    });
+  }
+};
+
+//fetch salary
+exports.getsalary = async (req, res) => {
+  try {
+    const salary = await Salary.find();
+    res.status(200).send({
+      salary,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      desc: "Error in getlabreport controller-" + error,
+    });
+  }
+};
