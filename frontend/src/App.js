@@ -13,7 +13,9 @@ import Admin from "./Screen/Admin";
 import Report from "./Components/Report";
 import Homescreenmanagement from "./Screen/Homescreenmanagement";
 import Paymentmanagement from "./Screen/Paymentmanagement";
-
+import PatientProfile from "./Screen/PatientProfile/PatientProfile";
+import MyAppointments from "./Screen/DoctorAppointment/MyAppointments";
+import MyMedicineOrders from "./Screen/PahrmacyService/MyMedicineOrders";
 
 const App = () => {
   return (
@@ -45,7 +47,8 @@ const App = () => {
         <Switch>
           <Route exact path="/profile/patient" component={Patient} />
         </Switch>
-         <Switch>
+
+        <Switch>
           <Route exact path="/profile/patient/getServices" component={PatientProfile} />
         </Switch>
 
@@ -80,7 +83,6 @@ const App = () => {
 };
 
 export default App;
-
 
 
 
