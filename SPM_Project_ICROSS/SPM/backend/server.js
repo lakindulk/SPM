@@ -3,17 +3,25 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const fileUpload = require('express-fileupload')
+
 
 //import routes
 
 const authenticationRoutes = require("./routes/authentication-routes");
 const doctorRoutes = require("./routes/doctor-routes");
-const notificationRoute=require("./routes/notification-routes");
-const adminRoutes=require("./routes/admin-routes");
+const notificationRoute = require("./routes/notification-routes");
+const adminRoutes = require("./routes/admin-routes");
+const treatmentRoutes = require("./routes/treatment-routes");
+const appointmentRoutes = require("./routes/appointment-routes");
 const patientDetailsRoutes = require("./routes/PatientRoute/PatientRoute");
-const appointmentRoutes=require("./routes/appointment-routes");
+const search = require("./routes/search-route");
 
 const app = express();
+
+app.use(fileUpload({
+  useTempFiles: true
+}))
 
 app.use(cors());
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -39,11 +47,15 @@ mongoose
 //use routes
 app.use("/codebusters/api/auth", authenticationRoutes);
 app.use("/codebusters/api/doctorpvt", doctorRoutes);
-app.use("/codebusters/api/notification", notificationRoute);
-app.use("/codebusters/api/admin",adminRoutes);
-app.use("/patient", patientDetailsRoutes);
+
+app.use("/codebusters/api/doctorpvt/treatment", treatmentRoutes);
 app.use("/codebusters/api/patientpvt/appointment", appointmentRoutes);
 
+app.use("/codebusters/api/notification", notificationRoute);
+app.use("/codebusters/api/admin", adminRoutes);
+
+app.use("/patient", patientDetailsRoutes);
+app.use("/codebusters/api/patientpvt/Doctor", search);
 //event loop for server
 app.listen(PORT, () => {
   console.log(`Backend Server is running on port ${PORT}`);
