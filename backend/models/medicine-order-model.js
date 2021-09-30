@@ -13,6 +13,10 @@ const MedicineOrderSchema = new mongoose.Schema({
         type:String,
         required: true,
     },
+    telNo: {
+        type: Number,
+
+    },
     gender:{
         type:String,
         required: true,
