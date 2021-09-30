@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 
 
 const initialstate = {
@@ -66,7 +67,7 @@ export default class EditAdminNotice extends Component {
         axios.put(`http://localhost:6500/notice/edit/${id}`, notice)
             .then(response => {
                 alert('Notice updated Successfully')
-                window.location=`/admin/notices`;
+                window.location = `/admin/notices`;
             })
             .catch(error => {
                 console.log(error.message);
@@ -90,16 +91,19 @@ export default class EditAdminNotice extends Component {
                             name="topic"
                             placeholder=""
                             value={this.state.topic}
-                            onChange={this.onChange} required/>
+                            onChange={this.onChange} required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="formGroupExampleInput2" className="form-label">Date</label>
-                        <input type="text"
+                        <DatePickerComponent
                             className="form-control"
                             id="date"
                             name="date"
+                            placeholder=""
                             value={this.state.date}
-                            onChange={this.onChange} required/>
+                            onChange={this.onChange}
+                            style={{ backgroundColor: "white", color: "black", padding: "6px", fontSize: "15px" }}
+                        />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="exampleFormControlTextarea1" className="form-label">Notice Description</label>
@@ -109,7 +113,7 @@ export default class EditAdminNotice extends Component {
                             rows="3"
                             name="description"
                             value={this.state.description}
-                            onChange={this.onChange}required></textarea>
+                            onChange={this.onChange} required></textarea>
                     </div>
                     <div className="mb-3">
                         <button type="submit" className="adminbtn">Edit Notice</button>
