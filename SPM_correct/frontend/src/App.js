@@ -18,7 +18,7 @@ import labreports from "./Screen/Labreports";
 import labreportAdd from "./Screen/LabreportAdd";
 import EditLabReport from "./Components/EditLabReport";
 import allRequests from "./Screen/AllRequestsLab"
-
+import chemistNotifications from "./Screen/chemistNotifications";
 
 
 
@@ -78,6 +78,9 @@ const App = () => {
         </Switch>
         <Switch>
           <Route exact path="/labchemist/labreports/requests" component={allRequests} />
+        </Switch>
+        <Switch>
+          <Route exact path="/labchemist/notifications" component={chemistNotifications} />
         </Switch>
         <Footer/>
       </main>
