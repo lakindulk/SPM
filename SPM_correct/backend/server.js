@@ -13,6 +13,7 @@ const adminRoutes=require("./routes/admin-routes");
 const contactusRoutes = require("./routes/contactus-routes");
 const labreportRoutes = require("./routes/labreport-routes");
 const reportrequest=require("./routes/reportrequest-routes");
+const chemistSalary = require("./routes/chemsalary-routes");
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use("/codebusters/api/admin",adminRoutes);
 app.use("/contactus",contactusRoutes());
 app.use("/labreport",labreportRoutes());
 app.use("/codebusters/api/doctorpvt/reportrequest", reportrequest);
+app.use("/chemist/salary",chemistSalary);
 
 
 //event loop for server
