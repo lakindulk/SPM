@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../Components/adminAddNotice.css';
+import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { Link } from 'react-router-dom';
 
 const initialstate = {
@@ -95,17 +96,20 @@ class AdminaddNotice extends Component {
                                 name="topic"
                                 placeholder=""
                                 value={this.state.topic}
-                                onChange={this.onChange}required />
+                                onChange={this.onChange} required />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="formGroupExampleInput2" className="form-label"required>Date</label>
-                            <input type="date"
+                            <label htmlFor="formGroupExampleInput2" className="form-label" required>Date</label>
+                            <DatePickerComponent
                                 className="form-control"
                                 id="date"
                                 name="date"
                                 placeholder=""
                                 value={this.state.date}
-                                onChange={this.onChange} />
+                                onChange={this.onChange}
+                                style={{ backgroundColor: "white", color: "black", padding: "6px", fontSize: "15px" }}
+                                required
+                            />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleFormControlTextarea1" className="form-label">Notice Description</label>
@@ -115,7 +119,7 @@ class AdminaddNotice extends Component {
                                 rows="3"
                                 name="description"
                                 value={this.state.description}
-                                onChange={this.onChange}required></textarea>
+                                onChange={this.onChange} required></textarea>
                         </div>
                         <div className="mb-3">
                             <button type="submit" className="adminbtn">Submit Notice</button>
@@ -125,7 +129,7 @@ class AdminaddNotice extends Component {
 
                 </div>
 
-                <div>
+                <div className="graph">
 
                     <table className="table table-bordered" style={{ marginTop: 20, marginLeft: 20, marginRight: 50 }}>
                         <thead>
@@ -142,7 +146,7 @@ class AdminaddNotice extends Component {
 
                                 <tr>
                                     <th scope="row">{item.topic}</th>
-                                    <td>{item.date}</td>
+                                    <td><DatePickerComponent value={item.date} style={{ fontSize: "19px" }} readOnly /></td>
                                     <td>{item.description}</td>
 
                                     <td>
