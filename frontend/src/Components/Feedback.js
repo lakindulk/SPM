@@ -28,12 +28,14 @@ function AddFeedback(){
     }
 
     return(
-    
-        <div className="container">
+   
+        <div className="containerfeed">
              <Pharmacist_Navbar/>
-             <div className="formset">
-            <div className="container"> <h4 align="middle">Feedback</h4>
-            <p>Your feedbacks are essential to guide and inform our decision making and influence innovations and changes to our service.
+             <div className="feedimgcontain">
+             <div className="formsetfeed">
+    
+            <div className=""> <h4 align="middle">Feedback</h4>
+            <p style={{fontWeight:"bold"}}>Your feedbacks are essential to guide and inform our decision making and influence innovations and changes to our service.
                  It's also essential for measuring your satisfaction among our current customers.
                  Getting a handle on how you view our service and supportis valuable. Please feel free to send your ideas about our service.</p>
             <form onSubmit={sendData}>
@@ -46,7 +48,7 @@ function AddFeedback(){
                 </div>
                 <div className="form-group">
                 <label for="Comment">Comment</label>
-                <input type="text" className="form-control" id="Comment" required  placeholder=""
+                <input type="text" className="form-control" style={{paddingBottom:'10vh'}} id="Comment" required  placeholder=""
                  onChange={(e)=>{
                     setComment(e.target.value);
                 }}/> <br/>
@@ -55,7 +57,7 @@ function AddFeedback(){
                 <br/><button type="submit" className="btn btn-primary">Add Feedback</button>
             </form>
             </div>
-                    </div></div>
+                    </div></div></div>
     )
 }
 export default AddFeedback;

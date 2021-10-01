@@ -23,12 +23,13 @@ const stockItem = new Schema({
        
     },
     ManuDate:{
-        type : Date
+        type : String 
+        
        
        
     },
     ExpireDate:{
-        type : Date
+        type : String
        
        
     }

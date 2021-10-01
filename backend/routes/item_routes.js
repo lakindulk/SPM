@@ -3,16 +3,16 @@ let Item = require("../models/item_model");
 
    //Add item
 router.route("/add").post((req,res)=>{
-    //console.log("add route backend calling")
+    console.log(req)
    const MediName = req.body.Medi_Name;
    const Amount = Number(req.body.Amount);
    const Cost = Number(req.body.Cost);
    const CompanyName = req.body.Company_Name;
-   const ManuDate = Date(req.body.ManuDate);
-   const ExpireDate = Date(req.body.ExpireDate);
+   const ManuDate = req.body.ManuDate;
+   const ExpireDate = req.body.ExpireDate;
    
-   console.log(ManuDate);
-   console.log(ExpireDate);
+   //console.log(ManuDate);
+   //console.log(ExpireDate);
    
    console.log("Medicine name is:"+MediName)
 
@@ -42,15 +42,15 @@ router.route("/").get((req,res)=>{
 //update items
 router.route("/update/:id").put(async(req,res) => {
     let userId=req.params.id;
-    const {MediName,Amount,Cost,CompanyName}=req.body;
+    const {MediName,Amount,Cost,CompanyName,ManuDate,ExpireDate}=req.body;
 
     const updateItem = {
         MediName,
         Amount,
         Cost,
-        CompanyName
-        // ManuDate,
-        // ExpireDate
+        CompanyName,
+        ManuDate,
+        ExpireDate
     }
     const update = await Item.findByIdAndUpdate(userId, updateItem).then(()=>{
         res.status(200).send({status:"Item updated"})

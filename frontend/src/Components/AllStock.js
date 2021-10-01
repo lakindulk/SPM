@@ -6,7 +6,11 @@ import axios from "axios";
 import "./PFoarm.css"
 //import Items from "../../";
 import jsPDF from 'jspdf'
+import DatePicker from "react-datepicker";
+import { DatePickerComponent, DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
+import "react-datepicker/dist/react-datepicker.css";
 import autotable from 'jspdf-autotable'
+
 
 function AllStockItem(){
     
@@ -87,36 +91,8 @@ function AllStockItem(){
 }
   
 
-    // const renderTable = () => {
-    //     console.log(searchTerm)
-    //     return stockItems.filter(item=>{
-    //       if(searchTerm=""){
-    //         console.log("check")
-    //         return item
-            
-    //       }
-    //       else if(item.MediName.toLowerCase().includes(searchTerm.toLowerCase())){
-    //           return item
-    //       }
-    //     }).map(item => {
-    //       return (
-    //         <tr>
-    //           <td>{item.MediName}</td>
-    //           <td>{item.Amount}</td>
-    //           <td>{item.Cost}</td> 
-    //           <td>{item.CompanyName}</td> 
-    //           <td>{item.ManuDate}</td> 
-    //           <td>{item.ExpireDate}</td> 
-    //           <div class="btn-toolbar"><td> <Link to={"/pharmacist/stock/edit/"+item._id}> <button type="button" className="btn btn-primary">Edit</button></Link>
-    //               <button type="button"  class="btn btn-danger" onClick={()=>{DeleteIteme(item._id)}}>Delete</button>  
-    //           </td></div>
-    //         </tr>
-    //       )
-    //     })
-    //   }
-
     return(
-        <div className="container">
+        <div className="Allstockcontainer">
              <Pharmacist_Navbar/>
              <div className="StockTable">
              <h4 align="middle">Stock Items</h4><br/>
@@ -161,12 +137,13 @@ function AllStockItem(){
             <td>{item.Amount}</td>
             <td>{item.Cost}</td> 
             <td>{item.CompanyName}</td> 
-            <td>{item.ManuDate}</td> 
-            <td>{item.ExpireDate}</td> 
+            <td><DatePickerComponent readOnly style={{ fontSize:"16px"}} value={item.ManuDate}></DatePickerComponent></td> 
+            <td><DatePickerComponent readOnly style={{ fontSize:"16px"}} value={item.ExpireDate}></DatePickerComponent></td> 
             <div class="btn-toolbar"><td> <Link to={"/pharmacist/stock/edit/"+item._id}>
                <button type="button" className="btn btn-primary">Edit</button></Link>
                 <button type="button"  class="btn btn-danger" onClick={()=>{DeleteIteme(item._id)}}>Delete</button>
-                <button type="button" className="btn btn-sm" onClick = {()=>{handlepdf(item.MediName,item.Amount,item.Cost,item.CompanyName,item.ManuDate,item.ExpireDate)}} >Generate Report</button>
+               <button type="button" className="btn btn-sm" onClick = {()=>{handlepdf(item.MediName,item.Amount,item.Cost,item.CompanyName,item.ManuDate,item.ExpireDate)}} >Generate Report</button>
+               
                
                 
                   

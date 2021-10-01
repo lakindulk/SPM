@@ -9,6 +9,7 @@ import "./PFoarm.css"
 function AllOrders(){
     
     const[Orders,setOrders] = useState([]);
+    const[searchTerm,setSearchTerm]=useState("");
   
     useEffect(()=>{
         function getOrders(){
@@ -24,37 +25,14 @@ function AllOrders(){
     } , [])
     
 
-    const renderTable = () => {
-        return Orders.map(Order => {
-          return (
-            <tr>
-              
-              <td style={{paddingTop:"12vh"}}>{Order.name}</td>
-              {/* <td>{Order.MediList}</td> */}
-              <td style={{paddingTop:"12vh"}}>{Order.address}</td> 
-              <td style={{paddingTop:"12vh"}}>{Order.telNo}</td>
-              <td><Image className="img"
-                  cloudName="/iplus/image/upload/" publicId={Order.photo}
-                  />
-              </td> 
-              <td style={{paddingTop:"12vh"}}>{Order.status}</td> 
-              <div className="btn-tb"><td> <Link to={"/pharmacist/orders/delivery/"+Order._id}> <button type="button" className="btn btn-primary">Deliver</button></Link>
-                  
-              </td></div>
-            </tr>
-            
-          )
-        })
-      }
-
-
     return(
-        <div className="container">
+        <div className="AllOrdercontainer">
              <Pharmacist_Navbar/>
              <div className="OrderTable">
              <h4 align="middle">All Orders</h4><br/>
         
-           
+             <input type="text" className="searchbx" placeholder="Search..." onChange={event=>{setSearchTerm(event.target.value)}}/>
+             <div className="tableOrder">
             <table className="table"> 
         <thead className="thead-dark">
           <tr>
@@ -66,10 +44,46 @@ function AllOrders(){
             <th>Action</th>
           </tr>
         </thead>
-        <tbody className="data">{renderTable()}</tbody>
+        <tbody className="data">
+          { Orders.filter((Order)=>{
+        if(searchTerm==""){
+          return Order
+        }
+        else if(Order.name.toLowerCase().includes(searchTerm.toLowerCase())){
+          return Order
+        }
+        else if(Order.address.toLowerCase().includes(searchTerm.toLowerCase())){
+          return Order
+        }
+        else if(Order.status.toLowerCase().includes(searchTerm.toLowerCase())){
+          return Order
+        }
+        
+        
+      }).map(Order => {
+          return (
+            <tr>
+              
+              <td style={{paddingTop:"12vh"}}>{Order.name}</td>
+              {/* <td>{Order.MediList}</td> */}
+              <td style={{paddingTop:"12vh"}}>{Order.address}</td> 
+              <td style={{paddingTop:"12vh"}}>{Order.telNo}</td>
+              <td ><Image className="img" 
+                  cloudName="/iplus/image/upload/" publicId={Order.photo}/>
+              </td> 
+              <td style={{paddingTop:"12vh"}}>{Order.status}</td> 
+              <div className="btn-tb"><td> <Link to={"/pharmacist/orders/delivery/"+Order._id}> <button type="button" className="btn btn-primary">Deliver</button></Link>
+               
+              </td></div>
+              
+            </tr>
+            
+          )
+        })}
+          </tbody>
       </table>
      
-
+        </div>
         </div> </div>
         
     )

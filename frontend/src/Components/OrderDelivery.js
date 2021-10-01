@@ -72,9 +72,13 @@ function OrderDeliver(e){
    
 
 return(
-    <div className="container">
+    <div className="OrderDEliveryContainer">
              <Pharmacist_Navbar/>
-             <div className="formset">
+
+        
+             <div className="item-edit-form">
+             <div className="rowEditItem">
+             <div className="column1EditItem">
              <h4 align="middle">Order Deliver</h4>
             <form  onSubmit={StatusChange}>
                 <div className="form-group">
@@ -108,6 +112,14 @@ return(
   
                 <button type="submit" className="btn btn-primary">Deliver</button>
             </form>
+                    </div>
+                    <div className="column2EditItem">
+                        
+                    
+                </div>  
+
+                    </div>
+
             </div>
                     </div>
 )

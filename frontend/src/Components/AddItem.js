@@ -3,6 +3,7 @@ import Pharmacist_Navbar from "./Pharmacist_header";
 import axios from "axios";
 import "./PFoarm.css"
 import DatePicker from "react-datepicker";
+import { DatePickerComponent} from "@syncfusion/ej2-react-calendars"
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -12,15 +13,18 @@ function AddItem(){
     const[Amount,setAmount] = useState("");
     const[Cost,setCost] = useState("");
     const[Company_Name,setCompanyName] = useState("");
-    const[Manu_Data,setManuDate] = useState("");
+    const[ManuDate,setManuDate] = useState("");
     const[ExpireDate,setExpireDate] = useState("");
+
+    // new Date(new Date().getFullYear(),new Date().getMonth(), 14)
+
      
     
     function sendData(e){
         e.preventDefault();
         
         console.log(ExpireDate)
-        const newItem = {Medi_Name,Amount,Cost,Company_Name,Manu_Data,ExpireDate}
+        const newItem = {Medi_Name,Amount,Cost,Company_Name,ManuDate,ExpireDate}
         console.log(newItem)
 
         axios.post("http://localhost:6500/item/add/",newItem).then(()=>{
@@ -34,13 +38,17 @@ function AddItem(){
         })
     }
 
+    
     return(
     
-        <div className="container">
-             <Pharmacist_Navbar/>
-             <div className="formset">
-            <div className="container"> <h4 align="middle">Add Item</h4>
-            
+        <div  className="AddItemContainer">
+        <Pharmacist_Navbar/>
+       
+            <br/>
+            <div className="item-edit-form">
+            <div className="rowEditItem">
+             <div className="column1AddItem">
+                 <h4 align="middle" >Add Item</h4><br/>
             <form onSubmit={sendData}>
                 <div className="form-group">
                 <label for="drugName">Medicine Name</label>
@@ -72,16 +80,39 @@ function AddItem(){
                 </div>
                 <div>
                 <label for="mDate">Manufactured Date</label>    
-                <DatePicker required dateFormat="dd-MM-yyyy" selected={Manu_Data} onChange={(date) => setManuDate(date)} />
+                <DatePickerComponent
+                 className="form-control" 
+                 id='date' 
+                 name="date" 
+                 placeholder="" 
+                 value={ManuDate}  
+                 onChange={(date) => setManuDate(date.target.value)} 
+                 style={{ backgroundColor: "white", color: "black", padding: "6px", fontSize: "15px" }}
+                                    required
+                 />
                 </div> <br/>   
                 <div>
                 <label for="eDate">Expiry Date</label>    
-                <DatePicker required dateFormat="dd-MM-yyyy" selected={ExpireDate} onChange={(edate) => setExpireDate(edate)} />
+                <DatePickerComponent 
+                className="form-control" 
+                id='date' 
+                name="date" 
+                placeholder="" 
+                value={ExpireDate} 
+                onChange={(edate) => setExpireDate(edate.target.value)} 
+                style={{ backgroundColor: "white", color: "black", padding: "6px", fontSize: "15px" }}
+                                    required/>
                 </div>    
-                <br/><button type="submit" className="btn btn-primary">Add</button>
+                <br/><button type="submit" className="btn btn-primary">Add</button><br/>
             </form>
             </div>
-                    </div></div>
+            <div className="column2AddItem">
+                        
+                    
+                </div>  
+            </div>
+            </div>
+                    </div>
     )
 }
 export default AddItem;

@@ -2,10 +2,10 @@ import React,{Component} from "react"
 import Pharmacist_Navbar from "./Pharmacist_header";
 import axios from "axios"
 import "./PFoarm.css"
-
-import DatePicker from "react-datepicker";
-
+import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import "react-datepicker/dist/react-datepicker.css";
+import { Card } from "react-bootstrap";
+import { Image } from "cloudinary-react";
 
 
 
@@ -14,7 +14,10 @@ const initialstate = {
     MediName: '',
     Amount: '',
     Cost: '',
-    CompanyName:''
+    CompanyName:'',
+    ManuDate:'',
+    ExpireDate:''
+
 }
 
 export default class EditItem extends Component {
@@ -43,8 +46,8 @@ export default class EditItem extends Component {
                 this.setState({ Amount: response.data.fitem.Amount })
                 this.setState({ Cost: response.data.fitem.Cost })
                 this.setState({ CompanyName: response.data.fitem.CompanyName })
-
-
+                this.setState({ ManuDate: response.data.fitem.ManuDate })    
+                this.setState({ ExpireDate: response.data.fitem.ExpireDate })    
             })
             .catch(function (error) {
                 alert('error in get Items to edit');
@@ -68,7 +71,9 @@ export default class EditItem extends Component {
             MediName: this.state.MediName,
             Amount: this.state.Amount,
             Cost: this.state.Cost,
-            CompanyName: this.state.CompanyName
+            CompanyName: this.state.CompanyName,
+            ManuDate:this.state.ManuDate,
+            ExpireDate:this.state.ExpireDate
 
         }
         console.log('Data', Item);
@@ -88,12 +93,14 @@ export default class EditItem extends Component {
 
     render() {
         return (
-            <div>
+            <div  className="item-edit-container">
             <Pharmacist_Navbar/>
-            <div className="item-edit-container">
+            <div className="item-edit-container"> 
                 <br/>
-                
-                <h4 align="middle">Edit Item</h4>
+                <div className="item-edit-form">
+                <div className="rowEditItem">
+                 <div className="column1EditItem">
+                 <h4 align="middle">Edit Item</h4>
                 <form onSubmit={this.onSubmit} className="container">
                     <div className="mb-3">
                         <label htmlFor="formGroupExampleInput" className="form-label"> Medicine Name</label>
@@ -139,32 +146,62 @@ export default class EditItem extends Component {
                             value={this.state.CompanyName}
                             onChange={this.onChange} />
                     </div>
-                    {/* <div>
+                    <div>
                     <label for="mDate">Manufactured Date</label>    
-                    <DatePicker required selected={Manu_Data} onChange={(date) => setManuDate(date)} />
+                    <DatePickerComponent className="form-control"
+                                    id="ManuDate"
+                                    name="ManuDate"
+                                    placeholder=""
+                                    value={this.state.ManuDate}
+                                    onChange={this.onChange} 
+                                    style={{ backgroundColor: "white", color: "black", padding: "6px", fontSize: "15px" }}
+                                    required/>
                     </div> <br/>   
                     <div>
-                    <label for="eDate">Expiry Date</label>    
-                    <DatePicker required selected={ExpireDate} onChange={(edate) => setExpireDate(edate)} />
-                    </div>     */}
+                    <label for="eDate" >Expiry Date</label>    
+                    <DatePickerComponent className="form-control"
+                                    id="ExpireDate"
+                                    name="ExpireDate"
+                                    placeholder=""
+                                    value={this.state.ExpireDate}
+                                    onChange={this.onChange}
+                                    style={{ backgroundColor: "white", color: "black", padding: "6px", fontSize: "15px" }}
+                                    required />
+                    </div> <br/>   
                     <div className="mb-3">
                         <button type="submit" className="btn btn-primary">Edit</button>
                     </div>
                 </form>
                 <br />
+                </div>
+                <div className="column2EditItem">
+                    <div className="imagecolumncontainer">
+                  <Image className="editItimg"
+                  cloudName="/dzvbjfdsz" publicId=""
+                  />
+                  </div> 
+                        
+                    
+                </div>
+</div>
 
             </div>
-            </div>
+            </div></div>
         )
     }
 
 }
 
+
+
+
+// //FUnction component
+
 // function EditItem(e){
-//     let[Medi_Name,setMediName] = useState("");
+//     let[MediName,setMediName] = useState("");
 //     let[Amount,setAmount] = useState("");
 //     let[Cost,setCost] = useState("");
-//     let[Company_Name,setCompanyName] = useState("");
+//     let[CompanyName,setCompanyName] = useState("");
 //     const item_id = useParams();
     
 
@@ -187,71 +224,57 @@ export default class EditItem extends Component {
 //                 console.log(err)
 //             })
 //         }
-//         // function UpdateItem(e){
-//         //     e.preventDefault();
-           
-//         //     const updatedItem = {Medi_Name,Amount,Cost,Company_Name}
-//         //     console.log(updatedItem)
     
-//         //     axios.put(`http://localhost:6500/item/update/${item_id.id}`,updatedItem).then(()=>{
-//         //         console.log(updatedItem)
-//         //         alert("Item Updated")
-               
-               
-//         //     }).catch((err)=>{
-//         //         alert(err)
-//         //     })
-//         // }
 //         getItem();
         
 //     })
     
-//         // function UpdateItem(e){
-//         //     e.preventDefault();
+//         function UpdateItem(e){
+//             e.preventDefault();
            
-//         //     const updatedItem = {Medi_Name,Amount,Cost,Company_Name}
-//         //     console.log(updatedItem)
+//             const updatedItem = {MediName,Amount,Cost,CompanyName}
+//             console.log(updatedItem)
     
-//         //     axios.put(`http://localhost:6500/item/update/${item_id.id}`,updatedItem).then(()=>{
-//         //         console.log(updatedItem)
-//         //         alert("Item Updated")
+//             axios.put(`http://localhost:6500/item/update/${item_id.id}`,updatedItem).then(()=>{
+//                 console.log(updatedItem)
+//                 alert("Item Updated")
                
                
-//         //     }).catch((err)=>{
-//         //         alert(err)
-//         //     })
-//         // }
+//             }).catch((err)=>{
+//                 alert(err)
+//             })
+//         }
    
 
 // return(
 //     <div className="container">
 //              <Pharmacist_Navbar/>
 //              <h4>Edit Item</h4>
-//             <form>
+//             <form onSubmit={UpdateItem}>
 //                 <div className="form-group">
 //                 <label for="drugName">Medicine Name</label>
-//                 <input type="text" class="form-control" id="drugName" required placeholder="Enter the drug name" value={Medi_Name}
+//                 <input type="text" class="form-control" id="drugName" required placeholder="Enter the drug name" value={MediName}
 //                 onChange={(e)=>{
 //                     setMediName(e.target.value);
 //                 }}/>
 //                 </div>
 //                 <div className="form-group">
 //                 <label for="Amount">Amount</label>
-//                 <input type="number" className="form-control" id="Amount" required  placeholder="Enter Amount" value={Amount}
+//                 <input type="number" className="form-control" id="Amount" required  placeholder="Enter Amount" defaultValue={Amount}
 //                  onChange={(e)=>{
 //                     setAmount(e.target.value);
 //                 }}/>
 //                 </div>
 //                 <div className="form-group">
 //                 <label for="cost">Cost</label>
-//                 <input type="number" className="form-control" id="cost" required placeholder="Enter Cost" value={Cost}
+//                 <input type="number" className="form-control" id="cost" required placeholder="Enter Cost" defaultValue={Cost}
 //                  onChange={(e)=>{
 //                     setCost(e.target.value);
 //                 }}/>
 //                 </div>
 //                 <div className="form-group">
 //                 <label for="Cname">Company Name</label>
-//                 <input type="text" className="form-control" id="Cname" required placeholder="Enter Company Name" value={Company_Name}
+//                 <input type="text" className="form-control" id="Cname" required placeholder="Enter Company Name" defaultValue={CompanyName}
 //                  onChange={(e)=>{
 //                     setCompanyName(e.target.value);
 //                 }}/>

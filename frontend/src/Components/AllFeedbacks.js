@@ -33,7 +33,7 @@ function AllFeedbacks(){
 
 
     return(
-        <div className="container">
+        <div className="Allfeedcontainer">
             
              <div className="StockTable">
              <h4 align="middle">All Feedbacks</h4><br/>
