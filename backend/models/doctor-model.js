@@ -58,31 +58,7 @@ profileImage: {
     type: String,
   },
 
- Report: [
-    {
-      patient:{
-        type: String,
-      },
-      patientsdescription: {
-        type: String,
-        required: [true, "Please provide description"],
-      },
-      docnote: {
-        type: String,  
-      },
-      reporttype1: {
-        type: String,
-        required: [true, "Please provide report type"],
-      },    
-      reporttype2: {
-        type: String,
-        
-      },
-      othertype: {
-        type: String,
-      },
-    },
-    ],
+
 });
 
 //by using "pre save" we run this code segment before mongoose save data on db

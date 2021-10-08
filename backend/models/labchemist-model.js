@@ -11,6 +11,10 @@ const LabchemistSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a username"],
   },
+  fullname: {
+    type: String,
+    required: [true, "Please provide a username"],
+  },
   email: {
     type: String,
     required: [true, "Please provide a email"],
@@ -28,14 +32,22 @@ const LabchemistSchema = new mongoose.Schema({
     required: [true, "Please provide a contact number"],
     length: 10,
   },
-  qulifications: {
+  qualifications: {
     type: String,
-    required: [true, "Please provide your qulifications"],
+    required: [true, "Please provide your qualifications"],
   },
-  fullname: {
-    type: String,
-    required: [true, "Please provide a username"],
+  profileImage: {
+    imagePublicId: {
+      type: String,
+   
+    },
+    imageSecURL: {
+      type: String,
+   
+    },
   },
+  
+  
  
 });
 

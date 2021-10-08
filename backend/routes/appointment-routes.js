@@ -6,13 +6,18 @@ const router = express.Router();
 const {
     addappointment,
     getapointment,
-    updateapointment
+    updateapointment,
+    deleteapointment,
+    getapointments
 } = require("../controllers/PatientController");
 
 // use routes
-router.route("/addappointments").put(addappointment);
-router.route("/getapointments").get(getapointment);
+router.route("/addappointments/:id").post(addappointment);
+router.route("/getapointments/:id").get(getapointment);
 router.route("/updateapointments").put(updateapointment);
+router.route("/deleteapointments/:id").delete(deleteapointment);
+router.route("/getapointments").get(getapointments);
+
 
 
 

@@ -10,7 +10,7 @@ const Editreseaechppr = (props) => {
   const [reporttype2, setreporttype2] = useState("");
   const [othertype, setothertype] = useState("");
 
-  const [rID,setid] = useState("");
+  const [tID,setid] = useState("");
 
   const [error] = useState("");
   
@@ -35,8 +35,8 @@ const Editreseaechppr = (props) => {
   };
 
 
-  const handleOk3 = () => {
-    deletedata();
+  const handleOk3 = (tID) => {
+    deletedata(tID);
    
   };
 
@@ -44,20 +44,12 @@ const Editreseaechppr = (props) => {
 
   
 
-  const deletedata = async () => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      },
-    };
-    let data = {rID};
-    
+  const deletedata = async (tID) => {
+ 
     try {
       await axios
-        .put(
-          "http://localhost:6500/codebusters/api/doctorpvts/removereportrequest",
-          data,
-          config
+        .delete(
+          "http://localhost:6500/codebusters/api/doctorpvt/reportrequest/removereportrequest/"+tID,
           
         )
         .then((res) => {
@@ -74,14 +66,10 @@ const Editreseaechppr = (props) => {
   };
 
   const updatereport  = async () => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      },
-    };
+   
 
     let dataObject = {
-         rID,
+      tID,
         patientsdescription,
         docnote,
         reporttype1,
@@ -93,9 +81,9 @@ const Editreseaechppr = (props) => {
     try {
       await axios
         .put(
-          "http://localhost:6500/codebusters/api/doctorpvts/updatereportrequest",
+          "http://localhost:6500/codebusters/api/doctorpvt/reportrequest/updatereportrequest",
           dataObject,
-          config
+          
         )
         .then((res) => {
           alert(" data Update Successfully!");
@@ -123,7 +111,7 @@ const Editreseaechppr = (props) => {
           <Button onClick={handleShow} size="sm" variant="outline-warning">
             Edit  Data 
           </Button>{" "}
-          <Button onClick={handleOk3} size="sm" variant="outline-danger">
+          <Button onClick={()=>handleOk3(props.resid)}size="sm" variant="outline-danger">
             Delete  Data
           </Button>{" "}
         </ListGroup.Item>

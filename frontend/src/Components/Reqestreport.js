@@ -1,29 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {  Button, Col, Form, Row } from "react-bootstrap";
 import axios from "axios";
 
 const Reqestreport = (props) => {
+  const [docname, setdocname] = useState("");
+  const [docemail, setdocemail] = useState("");
   const [patient, setpatient] = useState("");
   const [patientsdescription, setpatientsdescription] = useState("");
   const [docnote, setdocnote] = useState("");
   const [reporttype1, setreporttype1] = useState("");
   const [reporttype2, setreporttype2] = useState("");
   const [othertype, setothertype] = useState("");
-  const handleOk2 = () => {
+  const [appointments, setapointment] = useState([]);
+
+  const handleOk2 = (e) => {
+    e.preventDefault();
+      
+    if(!(docnote.trim().length > 5)){
+      alert("Doctor Note Must be more than five words")
+    }
+   else{
     requestreport();
+
+   }
+    
     
   };
 
   
+  useEffect(() => {
+
+    const getAppointment= async () => {
+      try {
+        await axios
+          .get(
+            " http://localhost:6500/codebusters/api/patientpvt/appointment/getapointments"
+          )
+          .then((res) => {
+            setapointment(res.data.apointment);
+          })
+          .catch((err) => {
+            alert(err.message);
+          });
+      } catch (err) {
+        alert("error :" + err);
+      }
+    };
+    getAppointment();
+  }, []);
+
   const requestreport = async () => {
   
-    const config = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-      },
-    };
+   
 
     let dataObject = {
+      docname,
+      docemail,
         patient,
         patientsdescription,
         docnote,
@@ -35,11 +67,11 @@ const Reqestreport = (props) => {
     try {
       await axios
         .put(
-          "http://localhost:6500/codebusters/api/doctorpvt/addreportrequest",
-          dataObject,
-          config
+          "http://localhost:6500/codebusters/api/doctorpvt/reportrequest/addreportrequest",
+          dataObject
         )
         .then((res) => {
+          
           alert("report data added Successfully!");
           window.location.reload();
         })
@@ -56,16 +88,60 @@ const Reqestreport = (props) => {
 
   return (
     <div  style={{ paddingTop: "3vh", paddingBottom: "25vh" }}>
-      <Form>
-   
+      <Form onSubmit={handleOk2}>
+      <p style={{color:"gray"}}> * Check name and email again. if your name is coreect press "space" in the name field and check email, If email is correct press "space" in email field. *</p>
+
+      <Form.Group as={Row} className="mb-3" controlId="topic">
+
+    <Form.Label column sm="2" className="labelstyle" >
+
+    Doctor name:
+    </Form.Label>
+    <Col sm="10">
+    <Form.Control type="text" placeholder={props.resfullname}  value={props.resfullname} onChange={(e) => {
+                        setdocname( props.resfullname);
+                      }} />
+    </Col>
+  </Form.Group>
+
+  <Form.Group as={Row} className="mb-3" controlId="topic">
+    <Form.Label column sm="2" className="labelstyle" >
+    Doctor email:  
+    </Form.Label>
+    <Col sm="10">
+    <Form.Control type="text" placeholder={props.resEmail}  value={props.resEmail} onChange={(e) => {
+                        setdocemail( e.target.value);
+                      }} />
+    </Col>
+  </Form.Group>
+  <p style={{color:"gray"}}> * confirm name and email  by pressing "Space" in both fields *</p>
+
       <Form.Group as={Row} className="mb-3" controlId="topic">
     <Form.Label column sm="2" className="labelstyle" >
     Patient : 
     </Form.Label>
     <Col sm="10">
-    <Form.Control type="text" placeholder="Enter Patient Name" onChange={(e) => {
-                        setpatient(e.target.value);
-                      }} />
+    <Form.Control
+          as="select"
+          custom
+          onChange={(e) => {
+            setpatient(e.target.value); }}>
+    
+
+    {appointments.map((appointment,index)=>
+      (
+        <>
+ {appointment.physician === props.resfullname  && (
+          <>
+
+<option key="index" value={appointment.fullname} >{appointment.fullname}</option>
+
+            </>
+ )}</>))}
+
+      
+</Form.Control> 
+
     </Col>
   </Form.Group>
 
@@ -81,12 +157,13 @@ const Reqestreport = (props) => {
   </Form.Group>
  
   <Form.Group as={Row} className="mb-3" controlId="subject">
+   
     <Form.Label column sm="2" className="labelstyle" >
     Doctor note :
             </Form.Label>
     <Col sm="10">
     <Form.Control as="textarea"
-                rows="7" placeholder="Enter Doctor Note"  onChange={(e) => {
+                rows="7" placeholder="Enter Doctor Note (more than five words)"  onChange={(e) => {
                         setdocnote(e.target.value); }}/>
     </Col>
   </Form.Group>

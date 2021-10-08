@@ -5,6 +5,8 @@ import {
   UserSwitchOutlined,
   PoweroffOutlined,
   UserOutlined,
+  PhoneOutlined,
+  InfoCircleOutlined,
 } from "@ant-design/icons";
 import "./Header.css";
 import axios from "axios";
@@ -127,6 +129,26 @@ const Header = () => {
               </Nav.Link>
             )}
 
+
+
+            {hasToken && (
+              <Nav.Link
+                href="/contactus"
+                className="custom-style-header-navlinks"
+              >
+                <PhoneOutlined style={{ fontSize: "1.5em" }} />
+                ContactUs
+              </Nav.Link>
+            )}
+ {!hasToken && (
+              <Nav.Link
+                href="/contactus"
+                className="custom-style-header-navlinks"
+              >
+                <PhoneOutlined style={{ fontSize: "1.5em" }} />
+                ContactUs
+              </Nav.Link>
+            )}
             {!hasToken && (
               <Nav.Link
                 href="/registration"

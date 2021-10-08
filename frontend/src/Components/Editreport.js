@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-import { Row, Col ,Container ,Card} from "react-bootstrap";
+import { Row, Col ,Container ,Card,Spinner,Button} from "react-bootstrap";
 
 import axios from "axios";
 import Editreportreq from "./Editreportreq";
@@ -13,21 +12,16 @@ const DocReport = () => {
   useEffect(() => {
     setLoading(true);
     const getReportData = async () => {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-      };
+     
       try {
         await axios
           .get(
-            "http://localhost:6500/codebusters/api/doctorpvt/getProfile",
-            config
+            "http://localhost:6500/codebusters/api/doctorpvt/reportrequest/getreportrequest",
+            
           )
           
           .then((res) => {
-            setreports(res.data.doctor);            
-            
+            setreports(res.data.Repoertrequest);            
 
           })
           .catch((err) => {
@@ -49,9 +43,9 @@ const DocReport = () => {
         <Col >
           <Row>
             <Container>
-           <h3>Added Reports</h3>
-          {reports.Report && reports.Report.length > 0
-                ? reports.Report.map((item,report) => {
+           <h3 style={{paddingBottom:"1vh"}}>Added Reports</h3>
+          {reports && reports.length > 0
+                ? reports.map((item,report) => {
             return <div key={report}>
            
               <Card border="secondary" style={{ width: '40rem' }}  >
@@ -78,7 +72,16 @@ const DocReport = () => {
               <br/>                                           
               </div>
           })
-        : "Loading..."}   
+        :  <Button variant="primary" disabled>
+        <Spinner
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />{"     "}
+        No Data Added or Network Error...
+      </Button>}   
             </Container>
           </Row>
         </Col>   

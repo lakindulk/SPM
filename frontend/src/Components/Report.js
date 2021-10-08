@@ -5,14 +5,35 @@ import Reqestreport from "../Components/Reqestreport";
 import Editreport from "../Components/Editreport";
 import axios from "axios";
 
-const Report = () => {
+const Report = (props) => {
+  const [_id, set_id] = useState("");
   const [username, setUsername] = useState(" ");
   const [profileImage, setProfilePic] = useState(" ");
   const [fullname, setfullname] = useState("");
+  const [appointments, setapointment] = useState([]);
+
   const [email, setEmail] = useState("");
 
-
   useEffect(() => {
+
+    const getAppointment= async () => {
+      try {
+        await axios
+          .get(
+            " http://localhost:6500/codebusters/api/patientpvt/appointment/getapointments"
+          )
+          .then((res) => {
+            setapointment(res.data.apointment);
+          })
+          .catch((err) => {
+            alert(err.message);
+          });
+      } catch (err) {
+        alert("error :" + err);
+      }
+    };
+
+
     //Get doctor details
     const GetDoctorDetails = async () => {
       const config = {
@@ -42,6 +63,7 @@ const Report = () => {
       }
     };
     GetDoctorDetails();
+    getAppointment();
   }, []);
 
   return (
@@ -65,8 +87,22 @@ const Report = () => {
         <Container className="custom-content-body">
 <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
   
+{appointments.map((appointment,index)=>
+      (
+        <div  key={index}>
+ <h1>{appointment.fullname}</h1>
+
+
+</div>
+      ))}
+
+
   <Tab eventKey="REQUEST REPORTS" title="REQUEST REPORTS">
-      <Reqestreport/>
+      <Reqestreport
+      resfullname={fullname}
+      resEmail={email}
+      
+      />
   </Tab>
   <Tab eventKey="EDIT REPORTS" title="EDIT REPORTS">
       <Editreport/>

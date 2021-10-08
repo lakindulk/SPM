@@ -5,11 +5,13 @@ const router = express.Router();
 const {
     getAdminDetails,
     getAlluserDetails,
+    savepayments
 } = require("../controllers/admin-controller");
 
 // use routes
 router.route("/getprofile").get(getAdminDetails);
 router.route("/allusers").get(getAlluserDetails);
+router.route("/savePayments").post(savepayments);
 
 
 

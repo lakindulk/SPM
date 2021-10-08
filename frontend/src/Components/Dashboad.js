@@ -91,7 +91,7 @@ Role : {admindetails.role}  </ListGroup.Item>
       ))}
 
 </div>
-<div style={{paddingBottom:"4vh"}}>
+<div style={{paddingBottom:"1vh"}}>
 
  <Row>
     <Col>

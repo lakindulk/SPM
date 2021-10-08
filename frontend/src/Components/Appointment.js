@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import "./appointment.css";
-const Appointment = () => {
+const Appointment = (props) => {
   const [fullname, setfullname] = useState("");
   const [appointments, setapointment] = useState([]);
   const [patientname, setpatientname] = useState("");
@@ -12,9 +12,16 @@ const Appointment = () => {
   const [medicines, setmedicines] = useState("");
   const [othernotes, setothernotes] = useState("");
   const [docname, setdocname] = useState("");
-
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   
   const [show, setShow] = useState(false);
+  
+  
+  const handledelete = (id) =>{ 
+    deleteApointment(id);
+  };
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -98,6 +105,26 @@ const Appointment = () => {
     getAppointment();
   }, []);
 
+  const deleteApointment = async (id) => {
+    console.log(id);
+    try {
+        var option = window.confirm("Are you sure you want to delete this appointment ? ")
+        if (option) {
+            await axios.delete(`http://localhost:6500/codebusters/api/patientpvt/appointment/deleteapointments/${id}`)
+                .then((res) => {
+                    alert("Appointment Successfully Deleted");
+                    window.location.reload(true);
+                })
+                .catch((err) => {
+                    alert("Error occurred" + err);
+                });
+        }
+    } catch (error) {
+        alert("Error occurred" + error);
+    }
+  };
+ 
+
   return (  
     <div style={{paddingBottom:"4vh"}}>
 
@@ -122,7 +149,9 @@ className="hoover"
     <Card.Text>
     {appointment.appointmentNote}
     </Card.Text>
-    <Button variant="success" onClick={handleShow}>Give Treatmant </Button>
+    <Button variant="success" onClick={handleShow}>Give Treatmant </Button>{" "}
+    <Button variant="danger" onClick={()=>handledelete(appointment._id)}>Delete </Button>{" "}
+
   </Card.Body>
 </Card>
 
@@ -220,8 +249,13 @@ className="hoover"
           <Button variant="outline-secondary" onClick={handleClose}>
             Close
           </Button>
-          <Link to="/report">
-          <Button variant="outline-dark"  >
+          <Link
+           to={{
+            pathname: "/report",
+            data: appointment.fullname // Data
+          }}
+          >
+          <Button variant="outline-dark" >
             Request Lab Report
           </Button>
         </Link>
@@ -231,11 +265,6 @@ className="hoover"
         </Modal.Footer>
       </Modal>
 </div>
-
-
-
-
-
  )}
         </div>
 

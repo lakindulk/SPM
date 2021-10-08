@@ -1,4 +1,5 @@
 const NotificationModel = require("../models/notification-model");
+const SalaryModel = require("../models/salary-model");
 
 exports.updateNotification = async (req, res) => {
   const { nID } = req.body;
@@ -36,6 +37,20 @@ exports.deleteNotification = async (req, res) => {
   exports.getnotification = async (req, res) => {
     try {
       const allNotification = await NotificationModel.find();
+      res.status(200).send({
+        allNotification,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        desc: "Error in getnotification controller-" + error,
+      });
+    }
+  };
+
+  exports.getsalary = async (req, res) => {
+    try {
+      const allNotification = await SalaryModel.find();
       res.status(200).send({
         allNotification,
       });

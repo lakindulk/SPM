@@ -3,10 +3,13 @@ import { Container, Tabs,Tab,Row, Col } from "react-bootstrap";
 import DoctorDetails from "../Components/DoctorDetails";
 import Appointment from "../Components/Appointment";
 import Appointmenthistory from "../Components/Appointmenthistory";
-import "./doctorprofile.css";
+import Labreport from "../Components/Labreport";
+import Notification from "../Components/Notification";
 import axios from "axios";
 
 const Doctorprofile = () => {
+  const [id, setid] = useState(" ");
+
   const [username, setUsername] = useState(" ");
   const [email, setEmail] = useState(" ");
   const [profileImage, setProfilePic] = useState(" ");
@@ -43,9 +46,7 @@ const Doctorprofile = () => {
             setother(res.data.doctor.other);
             setexperience(res.data.doctor.experience);
             setProfilePic(res.data.doctor.profileImage.imagePublicId);
-          
-
-
+            setid(res.data.doctor._id);
           })
           .catch((err) => {
             alert("Error occured!!! : " + err);
@@ -54,8 +55,6 @@ const Doctorprofile = () => {
         alert("Error occured!!! : " + error);
       }
     };
-
-
     GetDoctorDetails();
   }, []);
 
@@ -87,11 +86,15 @@ const Doctorprofile = () => {
     <Appointmenthistory/>
   </Tab>
   <Tab eventKey="LAB REPORTS" title="LAB REPORTS">
+    <Labreport/>
   </Tab>
   <Tab eventKey="APPOINMENTS" title="APPOINMENTS">
     <Appointment/>
   </Tab>
   <Tab eventKey="NOTIFICATIONS" title="NOTIFICATIONS">
+  <Notification
+  resid={id} 
+  />
   </Tab>
 </Tabs>
 
